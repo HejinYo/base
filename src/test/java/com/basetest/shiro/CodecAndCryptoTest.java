@@ -1,4 +1,4 @@
-package com.basetest.shiro.chapter5.hash;
+package com.basetest.shiro;
 
 import junit.framework.Assert;
 import org.apache.shiro.codec.Base64;

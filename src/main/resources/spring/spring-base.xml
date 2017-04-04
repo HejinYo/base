@@ -37,6 +37,7 @@
     <import resource="spring-datasource.xml"/>
     <import resource="spring-mybatis.xml"/>
     <import resource="spring-transaction.xml"/>
+    <import resource="spring-fastjson.xml"/>
     <import resource="spring-shiro.xml"/>
 
 </beans>

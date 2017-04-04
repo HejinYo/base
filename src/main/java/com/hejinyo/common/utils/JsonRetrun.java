@@ -28,8 +28,14 @@ public class JsonRetrun {
     /**
      * @return {"status":0}
      */
-    public static String result() {
-        Map<String, Object> jsonMap = new HashMap();//存放信息的对象
+    public static Map<String, Object> result() {
+        Map<String, Object> jsonMap = new HashMap(1);//存放信息的对象
+        jsonMap.put("status", SUCCESS);
+        return jsonMap;
+    }
+
+    public static String resultToString() {
+        Map<String, Object> jsonMap = new HashMap(1);//存放信息的对象
         jsonMap.put("status", SUCCESS);
         return JsonUtil.object2Json(jsonMap);
     }
@@ -38,8 +44,14 @@ public class JsonRetrun {
      * @param status
      * @return {"status":1}
      */
-    public static String result(int status) {
-        Map<String, Object> jsonMap = new HashMap();//存放信息的对象
+    public static Map<String, Object> result(int status) {
+        Map<String, Object> jsonMap = new HashMap(1);//存放信息的对象
+        jsonMap.put("status", status);
+        return jsonMap;
+    }
+
+    public static String resultToString(int status) {
+        Map<String, Object> jsonMap = new HashMap(1);//存放信息的对象
         jsonMap.put("status", status);
         return JsonUtil.object2Json(jsonMap);
     }
@@ -48,8 +60,15 @@ public class JsonRetrun {
      * @param message
      * @return {"message":"成功","status":0}
      */
-    public static String result(String message) {
-        Map<String, Object> jsonMap = new HashMap();//存放信息的对象
+    public static Map<String, Object> result(String message) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
+        jsonMap.put("status", SUCCESS);
+        jsonMap.put("message", message);
+        return jsonMap;
+    }
+
+    public static String resultToString(String message) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
         jsonMap.put("status", SUCCESS);
         jsonMap.put("message", message);
         return JsonUtil.object2Json(jsonMap);
@@ -60,8 +79,15 @@ public class JsonRetrun {
      * @param message
      * @return {"message":"失败","status":1}
      */
-    public static String result(int status, String message) {
-        Map<String, Object> jsonMap = new HashMap();//存放信息的对象
+    public static Map<String, Object> result(int status, String message) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
+        jsonMap.put("status", status);
+        jsonMap.put("message", message);
+        return jsonMap;
+    }
+
+    public static String resultToString(int status, String message) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
         jsonMap.put("status", status);
         jsonMap.put("message", message);
         return JsonUtil.object2Json(jsonMap);
@@ -72,8 +98,15 @@ public class JsonRetrun {
      * @param data
      * @return {"data":["1","2"],"status":0}
      */
-    public static String result(int status, Object data) {
-        Map<String, Object> jsonMap = new HashMap();//存放信息的对象
+    public static Map<String, Object> result(int status, Object data) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
+        jsonMap.put("status", status);
+        jsonMap.put("data", data);
+        return jsonMap;
+    }
+
+    public static String resultToString(int status, Object data) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
         jsonMap.put("status", status);
         jsonMap.put("data", data);
         return JsonUtil.object2Json(jsonMap);
@@ -85,8 +118,16 @@ public class JsonRetrun {
      * @param data
      * @return {"data":["1","2"],"message":"成功","status":0}
      */
-    public static String result(int status, String message, Object data) {
-        Map<String, Object> jsonMap = new HashMap();//存放信息的对象
+    public static Map<String, Object> result(int status, String message, Object data) {
+        Map<String, Object> jsonMap = new HashMap(3);//存放信息的对象
+        jsonMap.put("status", status);
+        jsonMap.put("message", message);
+        jsonMap.put("data", data);
+        return jsonMap;
+    }
+
+    public static String resultToString(int status, String message, Object data) {
+        Map<String, Object> jsonMap = new HashMap(3);//存放信息的对象
         jsonMap.put("status", status);
         jsonMap.put("message", message);
         jsonMap.put("data", data);
@@ -98,8 +139,15 @@ public class JsonRetrun {
      * @param message
      * @return {"errorcode":200,"message":"bad request"}
      */
-    public static String exception(int excode, String message) {
-        Map<String, Object> jsonMap = new HashMap();//存放信息的对象
+    public static Map<String, Object> exception(int excode, String message) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
+        jsonMap.put("excode", excode);
+        jsonMap.put("message", message);
+        return jsonMap;
+    }
+
+    public static String exceptionToString(int excode, String message) {
+        Map<String, Object> jsonMap = new HashMap(2);//存放信息的对象
         jsonMap.put("excode", excode);
         jsonMap.put("message", message);
         return JsonUtil.object2Json(jsonMap);

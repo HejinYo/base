@@ -44,9 +44,9 @@ public class ExceptionController {
             response.setCharacterEncoding("UTF-8"); //设置编码格式
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);//设置ContentType，返回内容的MIME类型
             response.setHeader("Cache-Control", "no-cache");//告诉所有的缓存机制是否可以缓存及哪种类型
-            String json = JsonRetrun.exception(1, "请求连接不存在");
+            String json = JsonRetrun.exceptionToString(1, "请求连接不存在");
             if (HttpStatus.INTERNAL_SERVER_ERROR.value() == code) {
-                json = JsonRetrun.exception(1, "服务器内部发生错误！");
+                json = JsonRetrun.exceptionToString(1, "服务器内部发生错误！");
             }
             try {
                 response.getWriter().write(json);

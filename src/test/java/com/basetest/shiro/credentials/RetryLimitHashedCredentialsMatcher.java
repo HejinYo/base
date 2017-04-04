@@ -1,4 +1,4 @@
-package com.basetest.shiro.chapter5.hash.credentials;
+package com.basetest.shiro.credentials;
 
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;

@@ -31,7 +31,7 @@
                 /verifyCode = anon
                 /codeimg = anon
                 /login = anon
-                /test/clearCached = anon
+                /test/** = anon
                 <!-- 静态资源 -->
                 /resources/** anon
                 <!-- 需要权限访问 -->

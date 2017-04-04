@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -63,7 +64,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String login(HttpSession session, @RequestBody String json) {
+    public Map<String, Object> login(HttpSession session, @RequestBody String json) {
        /* JSONObject jsonObject = JSONObject.fromObject(json);
                 String verifi = jsonObject.getString("verifi");
                 String username = jsonObject.getString("username");

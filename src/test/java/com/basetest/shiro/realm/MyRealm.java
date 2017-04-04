@@ -1,4 +1,4 @@
-package com.basetest.shiro.chapter5.hash.realm;
+package com.basetest.shiro.realm;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

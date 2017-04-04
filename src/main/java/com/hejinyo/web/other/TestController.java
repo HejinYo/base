@@ -1,10 +1,15 @@
 package com.hejinyo.web.other;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hejinyo.common.authorization.UserRealm;
 import com.hejinyo.pojo.other.Account;
 import com.hejinyo.common.utils.JsonRetrun;
+import com.hejinyo.pojo.system.Sys_Dto;
+import com.hejinyo.pojo.system.Sys_Menu;
+import com.hejinyo.pojo.system.Sys_User;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
@@ -14,10 +19,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -229,6 +231,19 @@ public class TestController {
         return jsonMap;
     }
 
+    @RequestMapping(value = "/html3")
+    @ResponseBody
+    public Object html3() {
+        Map<String, Object> jsonMap = new HashMap<String, Object>();
+        int msg = 1;
+        String status = "SUCCESS1";
+
+        jsonMap.put("msg", msg);
+        jsonMap.put("status", status);
+        jsonMap.put("data", 123);
+        return jsonMap;
+    }
+
 
     @RequestMapping(value = "/testresponse")
     public void testresponse(HttpServletRequest request, HttpServletResponse response) {
@@ -246,36 +261,36 @@ public class TestController {
 
     }
 
-    @RequestMapping(value = "/anonPage", produces = "application/json")
+    @RequestMapping(value = "/anonPage")
     @ResponseBody
-    public String anonPage() {
+    public Map<String, Object> anonPage() {
         return JsonRetrun.result(1, "你无权限！");
     }
 
     @RequestMapping(value = "/needquery", produces = "application/json")
     @ResponseBody
-    public String needquery() {
+    public Map<String, Object> needquery() {
         return JsonRetrun.result(1, "需要query权限访问！");
     }
 
     @RequestMapping(value = "/needview", produces = "application/json")
     @ResponseBody
     @RequiresPermissions("user:view")
-    public String needview() {
+    public Map<String, Object> needview() {
         return JsonRetrun.result(1, "需要view权限访问！");
     }
 
     @RequestMapping(value = "/needcreate", produces = "application/json")
     @ResponseBody
     @RequiresPermissions("user:create")
-    public String needcreate() {
+    public Map<String, Object> needcreate() {
         return JsonRetrun.result(1, "需要create权限访问！");
     }
 
     //解除登录错误锁定
     @RequestMapping(value = "/clearLock", produces = "application/json")
     @ResponseBody
-    public String clearLook(@RequestParam String username) {
+    public Map<String, Object> clearLook(@RequestParam String username) {
         Ehcache passwordRetryCache;
         CacheManager cacheManager = CacheManager.newInstance(CacheManager.class.getClassLoader().getResource("ehcache/shiro-ehcache.xml"));
         passwordRetryCache = cacheManager.getCache("passwordRetryCache");
@@ -301,9 +316,57 @@ public class TestController {
      */
     @RequestMapping(value = "/clearCached", produces = "application/json")
     @ResponseBody
-    public String clearCached() {
+    public Map<String, Object> clearCached() {
         userRealm.clearCached();
         return JsonRetrun.result(0, "清除缓存成功！");
+    }
+
+
+    @RequestMapping("/testDto")
+    @ResponseBody
+    public Sys_Dto testDto(Sys_Dto sys_dto) {
+        //System.out.println(sys_dto.getSys_menu().getMname());
+        System.out.println(sys_dto.getTest());
+        return sys_dto;
+    }
+
+    @RequestMapping("/testDto3")
+    @ResponseBody
+    public Sys_Menu testDto3(Sys_Menu sys_dto) {
+        //System.out.println(sys_dto.getSys_menu().getMname());
+        System.out.println(sys_dto.getMname());
+        return sys_dto;
+    }
+
+    @RequestMapping("/testDto2")
+    @ResponseBody
+    public Sys_User testDto2(Sys_User sys_user) {
+        //System.out.println(sys_dto.getSys_menu().getMname());
+        System.out.println(sys_user.toString());
+        return sys_user;
+    }
+
+    @RequestMapping("/testDto1")
+    @ResponseBody
+    public Sys_Dto testDto1(Sys_Dto sys_user) {
+        System.out.println("==========" + JSON.toJSONString(sys_user));
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
+        Gson gson = gsonBuilder.create();
+        System.out.println("===========" +gson.toJson(sys_user));
+        return sys_user;
+        //return JsonRetrun.result(1,gson.toJson(sys_user));
+    }
+    @RequestMapping("/testDto4")
+    @ResponseBody
+    public Sys_Dto testDto4(@RequestBody Sys_Dto sys_dto) {
+        System.out.println("==========" + JSON.toJSONString(sys_dto));
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
+        Gson gson = gsonBuilder.create();
+        System.out.println("-----------" +gson.toJson(sys_dto));
+        return sys_dto;
+        //return JsonRetrun.result(1,gson.toJson(sys_user));
     }
 
 }

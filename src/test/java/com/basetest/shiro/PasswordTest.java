@@ -1,4 +1,4 @@
-package com.basetest.shiro.chapter5.hash;
+package com.basetest.shiro;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.converters.AbstractConverter;

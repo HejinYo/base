@@ -24,7 +24,7 @@ public class Sys_MenuController {
 
     @RequestMapping(value = "/mutilMenu", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String login() {
+    public Map<String, Object> login() {
         Map<String, Object> map = new HashMap<String, Object>();
         //所有菜单
         List<Sys_Menu> sys_menus = sysMenuService.getSys_MenuList();

@@ -3,14 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
-
 
     <!-- 扫描service 包下面 web 使用注解的类型 -->
     <!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
@@ -35,19 +33,16 @@
     <!-- 1: 开启SpirngMVC注解模式，自动注册DefaultAnnotationHandLerMapping等，提供一些列：数据绑定，数字和日期的format 和 xml，json默认读写支持-->
     <mvc:annotation-driven validator="validator">
         <mvc:message-converters>
-            <!--如果用fastJson需要在这配置,fastJson返回的json会有反斜杠，前端解析麻烦，不推荐使用 -->
-            <!--<ref bean="jsonConverter" />-->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg value="UTF-8" index="0"/>
                 <property name="supportedMediaTypes">
                     <list>
-                        <value>text/html;charset=UTF-8</value>
                         <value>text/plain;charset=UTF-8</value>
-                        <value>application/json;charset=UTF-8</value>
-                        <value>*/*;charset=UTF-8</value>
                     </list>
                 </property>
             </bean>
+            <!--如果用fastJson需要在这配置 -->
+            <ref bean="fastJsonConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
@@ -58,8 +53,7 @@
     <mvc:resources mapping="/resources/**" location="/resources"/>
 
     <!--hibernate校验器-->
-    <bean id="validator"
-          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <!-- hibernate校验器-->
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
         <!-- 指定校验使用的资源文件，在文件中配置校验错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties -->
@@ -81,43 +75,41 @@
         <!-- 对资源文件内容缓存时间，单位秒 -->
         <property name="cacheSeconds" value="120"/>
     </bean>
-    <!-- 内容协商管理器  -->
-    <!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header-->
-    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
-        <property name="favorPathExtension" value="true"/>
-        <!-- 用于开启 /userinfo/123?format=json 的支持 -->
-        <property name="favorParameter" value="true"/>
-        <property name="parameterName" value="format"/>
-        <!-- 是否忽略Accept Header -->
-        <property name="ignoreAcceptHeader" value="false"/>
+    <!-- &lt;!&ndash; 内容协商管理器  &ndash;&gt;
+     &lt;!&ndash;1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header&ndash;&gt;
+     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+         &lt;!&ndash; 扩展名至mimeType的映射,即 /user.json => application/json &ndash;&gt;
+         <property name="favorPathExtension" value="true"/>
+         &lt;!&ndash; 用于开启 /userinfo/123?format=json 的支持 &ndash;&gt;
+         <property name="favorParameter" value="true"/>
+         <property name="parameterName" value="format"/>
+         &lt;!&ndash; 是否忽略Accept Header &ndash;&gt;
+         <property name="ignoreAcceptHeader" value="false"/>
 
-        <property name="mediaTypes"> <!--扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用  -->
-            <value>
-                json=application/json
-                xml=application/xml
-                html=text/html
-            </value>
-        </property>
-        <!-- 默认的content type -->
-        <property name="defaultContentType" value="text/html"/>
-    </bean>
-    <!-- ========================= VIEW定义 ========================= -->
-    <!-- 内容协商视图解析器；根据客户端的不同的请求决定不同的 view进行响应, 如 /blog/1.json /blog/1.xml -->
-    <!-- 会自动根据解析的contentType来决定使用哪个视图解析器（默认使用整个web应用中的viewResolver） -->
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" p:order="0">
-        <!-- 内容协商管理器 用于决定media type -->
-        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
-        <!-- 默认视图 放在解析链最后 -->
-        <property name="defaultViews">
-            <list>
-                <!--<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>-->
-                <bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView"/>
-                <!--<bean class="org.springframework.web.servlet.view.xml.MarshallingView"/>-->
-            </list>
-        </property>
-    </bean>
-
+         <property name="mediaTypes"> &lt;!&ndash;扩展名到MIME的映射；favorPathExtension, favorParameter是true时起作用  &ndash;&gt;
+             <value>
+                 json=application/json
+                 xml=application/xml
+                 html=text/html
+             </value>
+         </property>
+         &lt;!&ndash; 默认的content type &ndash;&gt;
+         <property name="defaultContentType" value="text/html"/>
+     </bean>
+     &lt;!&ndash; ========================= VIEW定义 ========================= &ndash;&gt;
+     &lt;!&ndash; 内容协商视图解析器；根据客户端的不同的请求决定不同的 view进行响应, 如 /blog/1.json /blog/1.xml &ndash;&gt;
+     &lt;!&ndash; 会自动根据解析的contentType来决定使用哪个视图解析器（默认使用整个web应用中的viewResolver） &ndash;&gt;
+     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" p:order="0">
+         &lt;!&ndash; 内容协商管理器 用于决定media type &ndash;&gt;
+         <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+         &lt;!&ndash; 默认视图 放在解析链最后 &ndash;&gt;
+         <property name="defaultViews">
+             <list>
+                 <bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView"/>
+             </list>
+         </property>
+     </bean>
+ -->
     <!-- 模型解析器, -->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

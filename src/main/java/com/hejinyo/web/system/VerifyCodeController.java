@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -35,7 +36,7 @@ public class VerifyCodeController {
      */
     @RequestMapping(value = "/verifyCode", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String getLoginCode(HttpServletRequest request, HttpSession session, @ModelAttribute("code") String code) {
+    public Map<String, Object> getLoginCode(HttpServletRequest request, HttpSession session, @ModelAttribute("code") String code) {
                /*Enumeration enu=request.getHeaderNames();//取得全部头信息
                while(enu.hasMoreElements()) {//以此取出头信息
                    String headerName = (String) enu.nextElement();
