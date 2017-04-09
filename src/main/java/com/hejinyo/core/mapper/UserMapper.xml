@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hejinyo.core.mapper.UserMapper">
+
+    <resultMap id="BaseUserMap" type="sys_user">
+        <id column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="loginName" jdbcType="VARCHAR" property="loginName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="loginSalt" jdbcType="VARCHAR" property="loginSalt"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="loginIp" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="loginTime" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createId" jdbcType="INTEGER" property="createId"/>
+    </resultMap>
+
+    <!-- 查询ActiveUser信息 -->
+    <resultMap id="ActiveUserMap" type="activeuser">
+        <id column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="loginName" jdbcType="VARCHAR" property="loginName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="loginSalt" jdbcType="VARCHAR" property="loginSalt"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <collection property="menus" ofType="menu">
+            <id column="resId" jdbcType="INTEGER" property="mid"/>
+            <result column="resName" jdbcType="VARCHAR" property="mname"/>
+            <result column="resUrl" jdbcType="VARCHAR" property="murl"/>
+            <result column="resPid" jdbcType="INTEGER" property="pid"/>
+            <result column="resLevel" jdbcType="INTEGER" property="mlevel"/>
+            <result column="resIcon" jdbcType="VARCHAR" property="micon"/>
+            <result column="seq" jdbcType="INTEGER" property="seq"/>
+            <result column="state" jdbcType="INTEGER" property="state"/>
+        </collection>
+    </resultMap>
+
+    <!-- 查询RolePermission信息 -->
+    <resultMap id="RolePermissionMap" type="rolepermission">
+        <id column="roleId" jdbcType="INTEGER" property="roleId"/>
+        <result column="roleName" jdbcType="VARCHAR" property="roleName"/>
+        <result column="seq" jdbcType="INTEGER" property="seq"/>
+        <collection property="permissions" ofType="permission">
+            <id column="resId" jdbcType="INTEGER" property="resId"/>
+            <result column="resName" jdbcType="VARCHAR" property="resName"/>
+            <result column="resUrl" jdbcType="VARCHAR" property="resUrl"/>
+            <result column="resLevel" jdbcType="INTEGER" property="resLevel"/>
+            <result column="resIcon" jdbcType="VARCHAR" property="resIcon"/>
+            <result column="rightsCode" jdbcType="VARCHAR" property="rightsCode" />
+            <result column="rightsName" jdbcType="VARCHAR" property="rightsName" />
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        userId, userName, loginName, password, loginSalt, email, phone, loginIp, loginTime,
+        state, createTime, createId
+       </sql>
+    <!-- 根据登录名查找对应的用户信息 -->
+    <select id="findActiveUser" resultMap="ActiveUserMap" parameterType="String">
+        select u.userId, userName, loginName, password, loginSalt, email, phone, u.state,
+                sre.resId, resName, resUrl, resPid, resLevel, resIcon, sre.seq
+          from sys_user u
+            left join sys_user_role ur on ur.userId = u.userId
+            left join sys_role sro on sro.roleId = ur.roleId
+            left join sys_role_permission rp on rp.roleId = sro.roleId
+            left join sys_resource_rights rr on rr.resourceRightsId = rp.resourceRightsId
+            left join sys_resource sre on sre.resId = rr.resId
+            left join sys_rights sri on sri.rightsId = rr.rightsId
+        	  where sri.rightsType='menu' and sri.rightsCode='view'
+        	  and loginName=#{loginName,jdbcType=VARCHAR}
+        	      order by respid,reslevel,sre.seq
+    </select>
+
+    <!-- 已认证用户查询角色和权限信息 -->
+    <select id="findRolePermission" resultMap="RolePermissionMap" parameterType="String">
+        select sro.roleId, roleName,sro.seq,concat(resName,rightsName) resName,rightsName,
+        		concat(resUrl,':',rightsCode) rightsCode, resIcon
+          from sys_user u
+            left join sys_user_role ur on ur.userId = u.userId
+            left join sys_role sro on sro.roleId = ur.roleId
+            left join sys_role_permission rp on rp.roleId = sro.roleId
+            left join sys_resource_rights rr on rr.resourceRightsId = rp.resourceRightsId
+            left join sys_resource sre on sre.resId = rr.resId
+            left join sys_rights sri on sri.rightsId = rr.rightsId
+              where sri.rightsType='data'
+              and loginName=#{loginName,jdbcType=VARCHAR}
+                order by respid,reslevel,sre.seq
+    </select>
+</mapper>

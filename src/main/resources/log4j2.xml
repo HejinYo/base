@@ -67,7 +67,7 @@
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="AsyncRollingRandomAccessFile"/>-->
         </Logger>
-        <Logger name="com.hejinyo.mapper" level="DEBUG" additivity="false">
+        <Logger name="com.hejinyo.core.mapper" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="AsyncRollingRandomAccessFile" />-->
         </Logger>

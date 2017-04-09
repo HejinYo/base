@@ -33,7 +33,7 @@
 
     <aop:config><!--定义切面  -->
         <!-- 配置事务切点 -->
-        <aop:pointcut id="pointcut" expression="execution(public * com.hejinyo.service.*.impl.*Impl.*(..))"/>
+        <aop:pointcut id="pointcut" expression="execution(public * com.hejinyo.*.service.*.impl.*Impl.*(..))"/>
         <!-- 将事务增强与切入点组合（织入事务切面） -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
     </aop:config>

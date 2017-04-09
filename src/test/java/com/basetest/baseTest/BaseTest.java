@@ -2,8 +2,8 @@ package com.basetest.baseTest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.hejinyo.common.utils.Tools;
-import com.hejinyo.pojo.system.Sys_Dto;
+import com.hejinyo.core.common.utils.Tools;
+import com.hejinyo.other.domain.Sys_Dto;
 import org.junit.Test;
 
 import java.util.Date;

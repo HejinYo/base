@@ -1,7 +1,6 @@
 package com.basetest.baseTest;
 
-import com.hejinyo.common.utils.JsonRetrun;
-import com.hejinyo.common.utils.JsonUtil;
+import com.hejinyo.core.common.utils.JsonRetrun;
 
 public class EasyTest {
     public static void main(String args[]) {

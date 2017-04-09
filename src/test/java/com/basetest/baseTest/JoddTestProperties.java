@@ -1,6 +1,6 @@
 package com.basetest.baseTest;
 
-import com.hejinyo.common.utils.Tools;
+import com.hejinyo.core.common.utils.Tools;
 import jodd.props.Props;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

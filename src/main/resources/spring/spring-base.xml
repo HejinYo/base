@@ -20,7 +20,8 @@
     <context:property-placeholder properties-ref="applicationProperties" ignore-resource-not-found="true"/>
 
     <!-- 扫描注解@Component , @Service , @Repository。 要把 controller去除，controller是在spring-mvc.xml中配置的，如果不去除会影响事务管理的。 -->
-    <context:component-scan base-package="com.hejinyo.service,com.hejinyo.mapper,com.hejinyo.pojo">
+    <!-- com.hejinyo.*.mapper 已经在 sping-mybatis.xml中文件扫描 -->
+    <context:component-scan base-package="com.hejinyo.*.service,com.hejinyo.*.domain">
         <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
@@ -28,7 +29,7 @@
     </context:component-scan>
 
     <!--Spring中ApplicationContext的工具类-->
-    <bean id="SpringContextUtil" class="com.hejinyo.common.utils.SpringContext"/>
+    <bean id="SpringContextUtil" class="com.hejinyo.core.common.utils.SpringContext"/>
 
     <!-- 开启AOP监听,aop启用CGliB代理,只对当前配置文件有效 -->
     <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>

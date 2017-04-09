@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hejinyo.core.mapper.Sys_MenuMapper">
+
+    <resultMap id="menuResultMap" type="com.hejinyo.core.domain.pojo.Sys_Menu">
+        <id column="mid" jdbcType="INTEGER" property="mid"/>
+        <result column="mname" jdbcType="VARCHAR" property="mname"/>
+        <result column="murl" jdbcType="VARCHAR" property="murl"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="mlevel" jdbcType="INTEGER" property="mlevel"/>
+        <result column="sorder" jdbcType="INTEGER" property="sorder"/>
+        <result column="micon" jdbcType="VARCHAR" property="micon"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="creater" jdbcType="INTEGER" property="creater"/>
+        <result column="credate" jdbcType="DATE" property="credate"/>
+    </resultMap>
+
+    <!--加载所有菜单-->
+    <select id="getSys_MenuList" resultMap="menuResultMap">
+      select mid,mname,murl,pid,mlevel,sorder,micon from sys_menu order by pid,mlevel,sorder
+    </select>
+
+
+    <!--    <select id="version" parameterType="long" resultType="int">
+          SELECT version FROM user WHERE id = #{id,jdbcType=INTEGER}
+        </select>
+
+        <delete id="delete" parameterType="UserAlias">
+          DELETE FROM user WHERE id = #{id:INTEGER}
+        </delete>
+
+        <insert id="insert" parameterType="UserAlias" useGeneratedKeys="false">
+          INSERT INTO user( id,username,password,administrator)
+            VALUES(#{id},#{username,jdbcType=VARCHAR},#{password.encrypted:VARCHAR},#{administrator,jdbcType=BOOLEAN})
+        </insert>
+
+        <update id="update" parameterType="UserAlias">
+          UPDATE user
+            SET username = #{username,jdbcType=VARCHAR},
+                password = #{password.encrypted,jdbcType=VARCHAR},
+                administrator = #{administrator,jdbcType=BOOLEAN}
+            WHERE
+                id = #{id,jdbcType=INTEGER}
+        </update>
+
+        <select id="isUniqueUsername" parameterType="map" resultType="boolean">
+            SELECT (count(*) = 0)
+            FROM user
+            WHERE ((#{userId,jdbcType=BIGINT} IS NOT NULL AND id != #{userId,jdbcType=BIGINT}) OR #{userId,jdbcType=BIGINT} IS
+            NULL)  &lt;!&ndash; other than me &ndash;&gt;
+            AND (username = #{username,jdbcType=VARCHAR})
+        </select>-->
+</mapper>

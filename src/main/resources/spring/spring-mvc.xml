@@ -12,7 +12,7 @@
 
     <!-- 扫描service 包下面 web 使用注解的类型 -->
     <!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
-    <context:component-scan base-package="com.hejinyo.web,com.hejinyo.common.exception" use-default-filters="false">
+    <context:component-scan base-package="com.hejinyo.*.web,com.hejinyo.core.common.exception" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
@@ -131,7 +131,7 @@
             <mvc:exclude-mapping path="/codeimg"/>
             <mvc:exclude-mapping path="/verifyCode"/>
             <mvc:exclude-mapping path="/sources/**"/>
-            <bean class="com.hejinyo.common.interceptor.LoginHandlerInterceptor"/>
+            <bean class="com.hejinyo.core.common.interceptor.LoginHandlerInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

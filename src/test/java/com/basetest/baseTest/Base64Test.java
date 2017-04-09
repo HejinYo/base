@@ -1,6 +1,5 @@
 package com.basetest.baseTest;
 
-import com.hejinyo.common.utils.Tools;
 import jodd.util.Base64;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;

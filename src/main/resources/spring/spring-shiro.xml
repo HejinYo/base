@@ -18,7 +18,7 @@
                 <!-- 将自定义 的FormAuthenticationFilter注入shiroFilter中-->
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="baseshirofilter">
-                    <bean class="com.hejinyo.common.authorization.BaseShiroFilter"/>
+                    <bean class="com.hejinyo.core.common.authorization.BaseShiroFilter"/>
                 </entry>
             </map>
         </property>
@@ -55,7 +55,7 @@
     </bean>
 
     <!-- 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的UserRealm.java -->
-    <bean id="userRealm" class="com.hejinyo.common.authorization.UserRealm">
+    <bean id="userRealm" class="com.hejinyo.core.common.authorization.UserRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/><!-- 凭证匹配器 -->
         <property name="cachingEnabled" value="true"/> <!-- 启用缓存，默认false -->
         <property name="authenticationCachingEnabled" value="true"/> <!--启用身份验证缓存，即缓存AuthenticationInfo信息，默认false-->
@@ -65,7 +65,7 @@
     </bean>
 
     <!-- 凭证匹配器 -->
-    <bean id="credentialsMatcher" class="com.hejinyo.common.authorization.RetryLimitHashedCredentialsMatcher">
+    <bean id="credentialsMatcher" class="com.hejinyo.core.common.authorization.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="md5"/> <!-- 散列算法 -->
         <property name="hashIterations" value="2"/> <!-- 散列次数 -->
@@ -96,7 +96,7 @@
     </bean>
 
     <!-- 会话验证调度器 -->
-    <bean id="sessionValidationScheduler" class="com.hejinyo.common.authorization.QuartzSessionValidationScheduler">
+    <bean id="sessionValidationScheduler" class="com.hejinyo.core.common.authorization.QuartzSessionValidationScheduler">
         <property name="sessionValidationInterval" value="${shiro.session.validation.interval}"/> <!-- 指定此调度程序调用的频率（以毫秒为单位）,默认60*60*1000 -->
         <property name="sessionManager" ref="sessionManager"/>
     </bean>
