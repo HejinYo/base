@@ -40,7 +40,7 @@
 
     <!-- 开启socket服务
          <listener>
-           <listener-class>com.hejinyo.socket.SocketServiceLoader</listener-class>
+           <listener-class>com.hejinyo.other.socket.SocketServiceLoader</listener-class>
          </listener>
      -->
 
