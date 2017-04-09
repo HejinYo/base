@@ -837,7 +837,7 @@
     }
 
     // Return a moment from input, that is local/utc/utcOffset equivalent to
-    // pojo.
+    // domain.
     function makeAs(input, model) {
         var res, diff;
         if (model._isUTC) {

@@ -15109,7 +15109,7 @@ hs=function(w,t,c){return w.each(function(){var s=this._jqm;$(t).each(function()
 
 //module begin
 	$.fmatter = {};
-	//opts can be id:row id for the row, rowdata:the data for the row, colmodel:the column pojo for this column
+	//opts can be id:row id for the row, rowdata:the data for the row, colmodel:the column domain for this column
 	//example {id:1234,}
 	$.extend($.fmatter,{
 		isBoolean : function(o) {

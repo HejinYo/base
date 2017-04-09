@@ -5839,7 +5839,7 @@ function getWidthOrHeight( elem, name, extra ) {
 		val = parseFloat( val ) || 0;
 	}
 
-	// Use the active box-sizing pojo to add/subtract irrelevant styles
+	// Use the active box-sizing domain to add/subtract irrelevant styles
 	return ( val +
 		augmentWidthOrHeight(
 			elem,

@@ -206,7 +206,7 @@
 	});
 	
 	/**
-	 * extend plugin to set box pojo width
+	 * extend plugin to set box domain width
 	 */
 	$.fn._outerWidth = function(width){
 		if (width == undefined){
@@ -219,7 +219,7 @@
 	};
 	
 	/**
-	 * extend plugin to set box pojo height
+	 * extend plugin to set box domain height
 	 */
 	$.fn._outerHeight = function(height){
 		if (height == undefined){
