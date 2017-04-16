@@ -2,7 +2,6 @@ var codeStatus = false;
 var Poshytip = $("#owl-login");
 var usernameLen = 4;
 var passwordLen = 6;
-var codeLen = 4;
 $(function () {
     //禁止回退
     //window.history.forward(1);
@@ -20,6 +19,13 @@ $(function () {
     buttomUsable();
     //登录动作
     doLogin();
+});
+$(document).keyup(function (event) {
+    if (event.keyCode == 13) {
+        if (null == $('button').attr('disabled')) {
+            $("button").trigger("click");
+        }
+    }
 });
 
 //输入内容限制

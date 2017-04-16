@@ -124,7 +124,7 @@
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="loginpw"/>
         <property name="loginUrl" value="/login"/> <!-- 执行登录的url -->
-        <property name="redirectSuccessUrl" value="/"/> <!-- 登陆前访问路径满足则跳转，默认不跳转，"/*"表示所有登录都跳转，"/"表示登陆前访问根目录跳转 -->
+        <property name="redirectSuccessUrl" value="/*"/> <!-- 登陆前访问路径满足则跳转，默认不跳转，"/*"表示所有登录都跳转，"/"表示登陆前访问根目录跳转 -->
         <property name="successUrl" value="${shiro.successUrl}"/> <!-- 登录成功跳转的页面，需要设置redirectSuccessUrl有效 -->
         <property name="rememberMeParam" value="rememberMe"/> <!-- rememberMe请求参数名，请求参数是boolean类型，true表示rememberMe -->
     </bean>

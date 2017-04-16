@@ -48,15 +48,15 @@
                     <div class="control-group">
                         <div class="controls">
                             <i for="username" class="control-label fa fa-user"></i>
-                            <input id="username" maxlength="16" type="text" name="username" placeholder="用户名" autofocus="autofocus" class="form-control input-medium">
+                            <input id="username" maxlength="16" type="text" name="username" placeholder="用户名" tabindex="1" autofocus="autofocus" class="form-control input-medium">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="controls">
                             <i for="password" class="control-label fa fa-lock"></i>
-                            <input id="password" maxlength="16" type="password" placeholder="密码" class="form-control input-medium">
+                            <input id="password" maxlength="16" type="password" placeholder="密码" tabindex="2" class="form-control input-medium">
                             <input id="loginpw" name="loginpw" type="hidden">
-                            <a class="forgot" href="login_forgot.html">
+                            <a class="forgot" href="login_forgot.html" tabindex="-2">
                                 忘记密码
                             </a>
                         </div>
@@ -65,11 +65,11 @@
                         <div class="control-group">
                             <div class="controls" style="margin-right: 130px;">
                                 <i for="verifi" class="control-label fa fa-key"></i>
-                                <input id="verifi" maxlength="4" type="text" name="verifyCode" placeholder="验证码" class="form-control input-medium">
+                                <input id="verifi" maxlength="4" type="text" name="verifyCode" placeholder="验证码" tabindex="3" class="form-control input-medium">
                                 <span for="verifi" class="glyphicon form-control-feedback"></span>
                             </div>
                         </div>
-                        <a class="refresh" href="#" title="点击刷新">
+                        <a class="refresh" href="#" title="点击刷新" tabindex="-1">
                             <img id="checkImg" src="/verifyImg">
                         </a>
                     </div>
