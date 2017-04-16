@@ -27,7 +27,7 @@
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="state" jdbcType="INTEGER" property="state"/>
-        <collection property="menus" ofType="menu">
+       <!-- <collection property="menus" ofType="menu">
             <id column="resId" jdbcType="INTEGER" property="mid"/>
             <result column="resName" jdbcType="VARCHAR" property="mname"/>
             <result column="resUrl" jdbcType="VARCHAR" property="murl"/>
@@ -36,7 +36,7 @@
             <result column="resIcon" jdbcType="VARCHAR" property="micon"/>
             <result column="seq" jdbcType="INTEGER" property="seq"/>
             <result column="state" jdbcType="INTEGER" property="state"/>
-        </collection>
+        </collection>-->
     </resultMap>
 
     <!-- 查询RolePermission信息 -->
@@ -50,8 +50,8 @@
             <result column="resUrl" jdbcType="VARCHAR" property="resUrl"/>
             <result column="resLevel" jdbcType="INTEGER" property="resLevel"/>
             <result column="resIcon" jdbcType="VARCHAR" property="resIcon"/>
-            <result column="rightsCode" jdbcType="VARCHAR" property="rightsCode" />
-            <result column="rightsName" jdbcType="VARCHAR" property="rightsName" />
+            <result column="rightsCode" jdbcType="VARCHAR" property="rightsCode"/>
+            <result column="rightsName" jdbcType="VARCHAR" property="rightsName"/>
         </collection>
     </resultMap>
 
@@ -61,18 +61,9 @@
        </sql>
     <!-- 根据登录名查找对应的用户信息 -->
     <select id="findActiveUser" resultMap="ActiveUserMap" parameterType="String">
-        select u.userId, userName, loginName, password, loginSalt, email, phone, u.state,
-                sre.resId, resName, resUrl, resPid, resLevel, resIcon, sre.seq
-          from sys_user u
-            left join sys_user_role ur on ur.userId = u.userId
-            left join sys_role sro on sro.roleId = ur.roleId
-            left join sys_role_permission rp on rp.roleId = sro.roleId
-            left join sys_resource_rights rr on rr.resourceRightsId = rp.resourceRightsId
-            left join sys_resource sre on sre.resId = rr.resId
-            left join sys_rights sri on sri.rightsId = rr.rightsId
-        	  where sri.rightsType='menu' and sri.rightsCode='view'
-        	  and loginName=#{loginName,jdbcType=VARCHAR}
-        	      order by respid,reslevel,sre.seq
+        select userId, userName, loginName, password, loginSalt, email, phone, state
+              from sys_user
+        	            where  loginName=#{loginName,jdbcType=VARCHAR}
     </select>
 
     <!-- 已认证用户查询角色和权限信息 -->

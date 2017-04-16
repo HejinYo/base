@@ -101,6 +101,17 @@
         <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>-->
 
+    <!-- 验证码过滤器需要放到Shiro之后 因为Shiro将包装HttpSession 如果不 可能造成两次的sesison id 不一样 -->
+    <filter>
+        <filter-name>JCaptchaFilter</filter-name>
+        <filter-class>com.hejinyo.core.common.jcaptcha.JCaptchaFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+    <filter-mapping>
+        <filter-name>JCaptchaFilter</filter-name>
+        <url-pattern>/verifyImg</url-pattern>
+    </filter-mapping>
+
     <!-- 编码过滤器，格式为UTF-8 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -152,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

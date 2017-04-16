@@ -60,7 +60,7 @@ public class UserRealm extends AuthorizingRealm {
         } else if (1 == activeUser.getState()) {//是否锁定
             throw new LockedAccountException(); //抛出帐号锁定异常
         }
-        //身份
+       /* //身份
         //所有菜单
         List<Menu> menus = activeUser.getMenus();
         Map<String, Object> map = new HashMap<String, Object>();
@@ -86,7 +86,7 @@ public class UserRealm extends AuthorizingRealm {
         map.put("menu3", menu3);
         String json = JsonRetrun.resultToString(0, map);
         System.out.println("==========================================");
-        System.out.println(json);
+        System.out.println(json);*/
 
         String password = activeUser.getPassword();//获取用户数据库中密码
         String salt = activeUser.getLoginSalt();//获取用户盐

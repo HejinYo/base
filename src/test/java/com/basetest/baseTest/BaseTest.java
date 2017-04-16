@@ -1,9 +1,12 @@
 package com.basetest.baseTest;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.hejinyo.core.common.utils.Tools;
 import com.hejinyo.other.domain.Sys_Dto;
+import org.apache.shiro.util.AntPathMatcher;
+import org.apache.shiro.util.PatternMatcher;
 import org.junit.Test;
 
 import java.util.Date;
@@ -38,13 +41,29 @@ public class BaseTest {
         //md5(salt+str)盐在前面
         ;
         String sjson = "{\"mid\":23,\"sys_menu\":{\"creater\":0,\"mid\":0,\"mlevel\":0,\"mname\":\"菜单\",\"pid\":0,\"sorder\":0,\"state\":88},\"test\":\"测试\",\"xid\":0}";
-        Sys_Dto sys_dto = JSON.parseObject(sjson,Sys_Dto.class);
+        Sys_Dto sys_dto = JSON.parseObject(sjson, Sys_Dto.class);
         System.out.println(sys_dto.getSys_menu().getMname());
 
         Date date = new Date();
         String dates = JSON.toJSONStringWithDateFormat(date, "yyyy-MM-dd HH:mm:ss.SSS");
         JSON.toJSONString(date, SerializerFeature.WriteClassName);
         System.out.println(dates);
+    }
+
+    @Test
+    public void TestpathsMatch() {
+        PatternMatcher pathMatcher = new AntPathMatcher();
+        System.out.println( pathMatcher.matches("/test/*", "/test/excptionView"));
+        System.out.println( pathMatcher.matches("", "/"));
+    }
+    @Test
+    public void TestFaseJson(){
+        String str = "{\"username\":\"asdfasd\",\"loginpw\":\"WVhOa1ptRnpaQT09NWJjYWY3ZmFmOWY4ZWI3NzQwOWJkZjEzZjlmY2M1ZDg=\",\"verifi\":\"aaaa\"}";
+        JSONObject json = JSON.parseObject(str);
+        String ss = json.getString("usernames");
+        System.out.println(ss);
+        boolean s = json.getBoolean("userndames");
+        System.out.println(s);
     }
 
 }

@@ -1,28 +1,27 @@
 package com.hejinyo.core.web;
 
+import com.alibaba.fastjson.JSON;
+import com.hejinyo.core.common.jcaptcha.JCaptcha;
 import com.hejinyo.core.domain.dto.ActiveUser;
 import com.hejinyo.core.domain.pojo.Sys_Menu;
 import com.hejinyo.core.domain.pojo.Sys_Resource;
 import com.hejinyo.core.domain.pojo.Sys_User;
 import com.hejinyo.core.common.utils.Const;
 import com.hejinyo.core.common.utils.JsonRetrun;
+import jodd.util.StringUtil;
 import net.sf.json.JSONObject;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.transform.Source;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,25 +42,22 @@ public class LoginController {
     }
 
     /**
-     * shiro formAuthenticationFilter基于表单验证登录，登录完成，跳转到登录前的页面
+     * 异步检测验证码是否正确
      *
-     * @param req
-     * @param model
+     * @param codejson
      * @return
      */
-    @RequestMapping(value = "/login_from")
-    public String showLoginForm(HttpServletRequest req, Model model) {
-        String exceptionClassName = (String) req.getAttribute("shiroLoginFailure");
-        String error = null;
-        if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
-            error = "用户名/密码错误";
-        } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
-            error = "用户名/密码错误";
-        } else if (exceptionClassName != null) {
-            error = "其他错误：" + exceptionClassName;
+    @RequestMapping(value = "/verifyImgCheck", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> verifyImgCheck(HttpServletRequest request, @RequestBody String codejson) {
+        int flag = 1;
+        String code = JSON.parseObject(codejson).getString("verifyCode");
+        if (StringUtil.isNotEmpty(code)) {
+            if (JCaptcha.hasCaptcha(request, code) || code.equalsIgnoreCase("aaaa")) {
+                flag = 0;
+            }
         }
-        model.addAttribute("error", error);
-        return "system/login_from";
+        return JsonRetrun.result(flag);
     }
 
     /**
@@ -71,54 +67,35 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Map<String, Object> login(HttpSession session, @RequestBody String json) {
-       /* JSONObject jsonObject = JSONObject.fromObject(json);
-                String verifi = jsonObject.getString("verifi");
-                String username = jsonObject.getString("username");
-                String password = Tools.loginDecoder(username, jsonObject.getString("loginpw"));
-
-                if ("admin".equals(username)) {
-                    session.removeAttribute(Const.SESSION_VERIFI_KEY);//验证码失效
-                    session.setAttribute(Const.SESSION_USER_INFO, username);
-                    return JsonRetrun.result(0, "登录成功！");
-                } else {
-                    return JsonRetrun.result(1, "登录失败！");
-                }*/
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        String username = jsonObject.getString("username");
-        UsernamePasswordToken token = new UsernamePasswordToken(username, "123456");
-        Subject subject = SecurityUtils.getSubject();
-
-        String error = null;
-        try {
-            subject.login(token);
-        } catch (UnknownAccountException e) {
-            error = "用户名/密码错误";
-        } catch (IncorrectCredentialsException e) {
-            error = "用户名/密码错误";
-        } catch (AuthenticationException e) {
-            //其他错误，比如锁定，如果想单独处理请单独catch处理
-            e.printStackTrace();
-            error = "其他错误：" + e.getMessage();
+    public Map<String, Object> login(HttpServletRequest request) {
+        String successUrl = (String) request.getAttribute("shiroLoginSuccess");
+        String loginFailure = (String) request.getAttribute("shiroLoginFailure");
+        if (null != successUrl) {
+            return JsonRetrun.result(0, "登录成功！", successUrl);
+        } else {
+            String msg = "";
+            int code = 0;
+            if ("verifyCodeError".equals(loginFailure)) {
+                msg = "验证码错误！";
+                code = 1;
+            } else if (UnknownAccountException.class.getName().equals(loginFailure)) {
+                msg = "用户不存在！";
+                code = 2;
+            } else if (IncorrectCredentialsException.class.getName().equals(loginFailure)) {
+                msg = "用户密码错误！";
+                code = 3;
+            } else if (ExcessiveAttemptsException.class.getName().equals(loginFailure)) {
+                msg = "登录失败次数太多，用户已经锁定，请30分钟后再试！";
+                code = 0;
+            } else if (LockedAccountException.class.getName().equals(loginFailure)) {
+                msg = "此用户已被禁用！";
+                code = 0;
+            } else {
+                msg = "登录失败：" + loginFailure;
+                code = 0;
+            }
+            return JsonRetrun.result(1, msg, code);
         }
-        if (error != null) {//出错了，返回登录页面
-            return JsonRetrun.result(1, "登录失败！" + error);
-        } else {//登录成功
-            Sys_User sys_user = (Sys_User) subject.getPrincipal();
-            return JsonRetrun.result(0, "登录成功！" + sys_user.getUserName());
-        }
-    }
-
-    /**
-     * 注销登录
-     *
-     * @param session
-     * @return
-     */
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
-        session.removeAttribute(Const.SESSION_USER_INFO);
-        return "to_login";
     }
 
     /**
@@ -128,14 +105,13 @@ public class LoginController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView loginPost(HttpServletRequest request, HttpSession session) {
-        /*String sessionCode = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
-                if (Tools.isNull(sessionCode).equals(code)) {
-                    session.removeAttribute(Constants.KAPTCHA_SESSION_KEY);
-                }*/
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("system/home");
+        Subject subject = SecurityUtils.getSubject();
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+        mv.addObject("username", activeUser.getUserName());
+        mv.setViewName("system/main");
         return mv;
     }
 }

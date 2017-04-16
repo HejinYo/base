@@ -168,6 +168,9 @@ public class Tools {
 
     public static void main(String agrs[]) {
         //String password = generatePassword("admin","123456");
-        System.out.println(base64Decoder("4AvVhmFLUs0KTA3Kprsdag=="));
+        //System.out.println(base64Decoder("4AvVhmFLUs0KTA3Kprsdag=="));
+        System.out.println(base64Encode("123456"));
+        System.out.println("???");
+        System.out.println(base64Decoder("TVRJek5EVTI="));
     }
 }

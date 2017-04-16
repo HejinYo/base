@@ -4,12 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- 验证码拦截器 -->
+    <!--<bean id="jCaptchaValidateFilter" class="com.hejinyo.core.common.jcaptcha.JCaptchaValidateFilter">
+        <property name="jcaptchaEbabled" value="true"/>
+        <property name="jcaptchaParam" value="jcaptchaCode"/>
+        <property name="failureKeyAttribute" value="shiroLoginFailure"/>
+    </bean>-->
+
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <!-- 要求登录时的链接,默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
         <property name="loginUrl" value="${shiro.loginUrl}"/>
         <!-- 认证成功统一跳转的连接，shiro认证成功自动到上一个请求路径 -->
-        <property name="successUrl" value="${shiro.successUrl}"/>
+        <!--<property name="successUrl" value="${shiro.successUrl}"/>-->
         <!-- unauthorizedUrl 属性指定如果授权失败时重定向到的地址 -->
         <property name="unauthorizedUrl" value="${shiro.unauthorizedUrl}"/>
         <!-- 自定义filter配置 -->
@@ -17,6 +24,7 @@
             <map>
                 <!-- 将自定义 的FormAuthenticationFilter注入shiroFilter中-->
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <!--<entry key="jCaptchaValidate" value-ref="jCaptchaValidateFilter"/>-->
                 <entry key="baseshirofilter">
                     <bean class="com.hejinyo.core.common.authorization.BaseShiroFilter"/>
                 </entry>
@@ -28,16 +36,15 @@
                 <!-- 退出拦截，请求logout.action执行退出操作 -->
                 /logout = logout
                 <!-- 匿名可以访问页面 -->
-                /verifyCode = anon
-                /codeimg = anon
-                /login = anon
-                /test/** = anon
-                <!-- 静态资源 -->
+                /verifyImg** = anon
                 /resources/** anon
+                /test/clearLock = anon
+                /test/html2 = user
+                <!-- 静态资源 -->
                 <!-- 需要权限访问 -->
+                /login = authc
                 /test/needquery=perms[user:query]
                 <!-- 身份认证通过可以访问 -->
-                /test/html2 = user
                 /** = authc
             </value>
         </property>
@@ -113,10 +120,12 @@
     </bean>
 
     <!-- 基于Form表单的身份验证过滤器 -->
-    <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+    <bean id="formAuthenticationFilter" class="com.hejinyo.core.common.authorization.AjaxLoginFilter">
         <property name="usernameParam" value="username"/>
-        <property name="passwordParam" value="password"/>
-        <property name="loginUrl" value="/login_from"/> <!-- 执行登录的url -->
+        <property name="passwordParam" value="loginpw"/>
+        <property name="loginUrl" value="/login"/> <!-- 执行登录的url -->
+        <property name="redirectSuccessUrl" value="/"/> <!-- 登陆前访问路径满足则跳转，默认不跳转，"/*"表示所有登录都跳转，"/"表示登陆前访问根目录跳转 -->
+        <property name="successUrl" value="${shiro.successUrl}"/> <!-- 登录成功跳转的页面，需要设置redirectSuccessUrl有效 -->
         <property name="rememberMeParam" value="rememberMe"/> <!-- rememberMe请求参数名，请求参数是boolean类型，true表示rememberMe -->
     </bean>
 

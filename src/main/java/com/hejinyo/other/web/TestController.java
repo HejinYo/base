@@ -292,7 +292,7 @@ public class TestController {
     public Map<String, Object> clearLook(@RequestParam String username) {
         Ehcache passwordRetryCache;
         CacheManager cacheManager = CacheManager.newInstance(CacheManager.class.getClassLoader().getResource("ehcache/shiro-ehcache.xml"));
-        passwordRetryCache = cacheManager.getCache("passwordRetryCache");
+        passwordRetryCache = cacheManager.getCache("loginRecordCache");
         Element element = passwordRetryCache.get(username);
         int count = 0;
         if (element == null) {
@@ -316,7 +316,7 @@ public class TestController {
     @RequestMapping(value = "/clearCached", produces = "application/json")
     @ResponseBody
     public Map<String, Object> clearCached() {
-        userRealm.clearCached();
+        userRealm.clearAllCachedAuthenticationInfo();
         return JsonRetrun.result(0, "清除缓存成功！");
     }
 

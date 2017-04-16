@@ -21,5 +21,5 @@ public class ActiveUser implements Serializable {
     private String email;//邮箱
     private String phone;//手机号
     private Integer state;//用户状态 0：正常；1：锁定；-1：禁用(删除)
-    private List<Menu> menus;//用户拥有权限(菜单)
+    //private List<Menu> menus;//用户拥有权限(菜单)
 }
