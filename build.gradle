@@ -4,6 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
+apply plugin: 'jetty'//应用jetty插件
 
 // 设置 JDK 版本
 sourceCompatibility = 1.8 //指定编译编译.java文件的jdk版本
@@ -90,7 +91,6 @@ dependencies {
     /* End Tools */
 
     /*test*/
-
     /*end test*/
 }
 
@@ -105,8 +105,18 @@ sourceSets {
         }
     }
 }
-
+//jetty内置容器插件运行配置
+jettyRun {
+    //访问端口号
+    httpPort = 8080
+    //访问项目名称
+    contextPath = '/'
+}
 //版本控制
 task wrapper(type: Wrapper) {
     gradleVersion = '1.0'
+}
+//使用UTF-8完成任务，解决jetty等插件乱码问题
+tasks.withType(JavaCompile) {
+options.encoding = "UTF-8"
 }
