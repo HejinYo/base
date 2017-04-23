@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hejinyo.core.mapper.SysUserMapper">
+
+    <resultMap id="BaseUserMap" type="sysuser">
+        <id column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="loginName" jdbcType="VARCHAR" property="loginName"/>
+        <result column="loginPwd" jdbcType="VARCHAR" property="loginPwd"/>
+        <result column="loginSalt" jdbcType="VARCHAR" property="loginSalt"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="loginIp" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="loginTime" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createId" jdbcType="INTEGER" property="createId"/>
+    </resultMap>
+
+    <sql id="Base_User_List">
+        userId, userName, loginName, loginPwd, loginSalt, email, phone, loginIp, loginTime,
+        state, createTime, createId
+       </sql>
+
+    <!-- 根据登录名查找对应的用户信息 -->
+    <select id="findByLoginName" resultMap="BaseUserMap" parameterType="String">
+        select
+        <include refid="Base_User_List"/>
+        from sys_user
+        where loginName=#{loginName}
+    </select>
+
+    <!-- 根据登录名查找对应的角色编码字符串 -->
+    <select id="findRoleSet" resultType="String" parameterType="String">
+        select
+        	roleCode
+        from
+        	sys_role r
+        left join sys_user_role ur on ur.roleId = r.roleId
+        left join sys_user u on u.userId = ur.userId
+        where
+        	u.loginName = #{loginName}
+    </select>
+
+    <!-- 根据登录名查找对应的权限编码字符串 -->
+    <select id="findFuncSet" resultType="String" parameterType="String">
+        SELECT
+        	concat(f.resCode,':',f.funcCode) funcCode
+        FROM
+        	sys_function f
+        LEFT JOIN sys_resource r ON r.resCode = f.resCode
+        LEFT JOIN sys_role_resource rr ON rr.resId = r.resId
+        LEFT JOIN sys_role sr ON sr.roleId = rr.roleId
+        LEFT JOIN sys_user_role ur ON ur.roleId = sr.roleId
+        LEFT JOIN sys_user u ON u.userId = ur.userId
+        WHERE
+        	u.loginName = #{loginName}
+    </select>
+
+</mapper>

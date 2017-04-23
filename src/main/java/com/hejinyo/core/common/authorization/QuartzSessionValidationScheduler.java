@@ -1,13 +1,12 @@
 package com.hejinyo.core.common.authorization;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SessionValidationScheduler;
 import org.apache.shiro.session.mgt.ValidatingSessionManager;
-import org.apache.shiro.session.mgt.quartz.QuartzSessionValidationJob;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 基于Quartz 2.* 版本的实现，解决shiro quartz 1.6 版本与 quartz 2.* 版本冲突
@@ -23,7 +22,8 @@ public class QuartzSessionValidationScheduler implements SessionValidationSchedu
 
     public static final long DEFAULT_SESSION_VALIDATION_INTERVAL = DefaultSessionManager.DEFAULT_SESSION_VALIDATION_INTERVAL;
     private static final String JOB_NAME = "SessionValidationJob";
-    private static final Logger log = LogManager.getLogger(QuartzSessionValidationScheduler.class);
+    private static final Logger log = LoggerFactory.getLogger(QuartzSessionValidationScheduler.class);
+    private static final String SESSION_MANAGER_KEY = QuartzSessionValidationJob2.SESSION_MANAGER_KEY;
     private Scheduler scheduler;
     private boolean schedulerImplicitlyCreated = false;
 
@@ -71,11 +71,11 @@ public class QuartzSessionValidationScheduler implements SessionValidationSchedu
         try {
             SimpleTrigger trigger = TriggerBuilder.newTrigger().startNow().withIdentity(JOB_NAME, Scheduler.DEFAULT_GROUP)
                     .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMilliseconds(sessionValidationInterval))
-                    .build();
+                    .build();//<span style="color:#ff0000;">Quartz 2中的实现</span>
 
-            JobDetail detail = JobBuilder.newJob(QuartzSessionValidationJob.class)
+            JobDetail detail = JobBuilder.newJob(QuartzSessionValidationJob2.class)
                     .withIdentity(JOB_NAME, Scheduler.DEFAULT_GROUP).build();
-            detail.getJobDataMap().put("sessionManager", this.sessionManager);
+            detail.getJobDataMap().put(SESSION_MANAGER_KEY, this.sessionManager);
             Scheduler scheduler = getScheduler();
 
             scheduler.scheduleJob(detail, trigger);

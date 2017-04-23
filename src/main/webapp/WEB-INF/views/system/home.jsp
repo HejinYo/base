@@ -9,7 +9,7 @@
 <head>
     <title>HejinYo - Responsive Admin Template</title>
     <%-- Start: COMMON RESOURCES --%>
-    <%@ include file="/resources/js/common/commonresource.jsp" %>
+    <%@ include file="/resources/dist/js/common/commonresource.jsp" %>
     <%-- End : COMMON RESOURCES --%>
     <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
     <link rel="stylesheet" href="<%=basePath%>resources/vendor/jquery-easyui/themes/material/easyui.css" type="text/css" />

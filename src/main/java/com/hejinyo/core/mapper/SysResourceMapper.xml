@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hejinyo.core.mapper.SysResourceMapper">
+    <resultMap id="BaseResourceMap" type="sysresource">
+        <id column="resId" jdbcType="INTEGER" property="resId"/>
+        <result column="resType" jdbcType="VARCHAR" property="resType"/>
+        <result column="resCode" jdbcType="VARCHAR" property="resCode"/>
+        <result column="resName" jdbcType="VARCHAR" property="resName"/>
+        <result column="resPid" jdbcType="INTEGER" property="resPid"/>
+        <result column="resLevel" jdbcType="INTEGER" property="resLevel"/>
+        <result column="resIcon" jdbcType="VARCHAR" property="resIcon"/>
+        <result column="seq" jdbcType="INTEGER" property="seq"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="createId" jdbcType="INTEGER" property="createId"/>
+        <collection property="function" ofType="sysfunction">
+            <id column="resCode" jdbcType="VARCHAR" property="resCode"/>
+            <id column="funcCode" jdbcType="VARCHAR" property="funcCode"/>
+            <result column="funcName" jdbcType="VARCHAR" property="funcName"/>
+            <result column="funcUrl" jdbcType="VARCHAR" property="funcUrl"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="BaseMenuMap" type="sysmenu">
+        <id column="resId" jdbcType="INTEGER" property="mid"/>
+        <result column="resCode" jdbcType="VARCHAR" property="redCode"/>
+        <result column="resName" jdbcType="VARCHAR" property="mname"/>
+        <result column="resPid" jdbcType="INTEGER" property="pid"/>
+        <result column="resLevel" jdbcType="INTEGER" property="mlevel"/>
+        <result column="resIcon" jdbcType="VARCHAR" property="micon"/>
+        <result column="seq" jdbcType="INTEGER" property="seq"/>
+        <result column="funcUrl" jdbcType="INTEGER" property="murl"/>
+    </resultMap>
+
+    <sql id="Base_Resource_List">
+    resId, resType, resCode, resName, resPid, resLevel, resIcon, seq, state, createTime,
+    createId
+  </sql>
+
+    <!-- 根据登录名获取菜单信息 -->
+    <select id="getMenuByLoginName" resultMap="BaseMenuMap" parameterType="String">
+        SELECT
+        	sr.resId,
+        	sr.resCode,
+        	resName,
+        	resPid,
+        	resLevel,
+        	resIcon,
+        	sr.seq,
+        	f.funcUrl
+        FROM
+        	sys_resource sr
+        LEFT JOIN sys_function f ON f.resCode = sr.resCode
+        LEFT JOIN sys_role_resource rr ON rr.resId = sr.resId
+        LEFT JOIN sys_role r ON r.roleId = rr.roleId
+        LEFT JOIN sys_user_role ur ON ur.roleId = rr.roleId
+        LEFT JOIN sys_user u ON u.userId = ur.userId
+        WHERE
+        	resType = 'menu'
+        AND sr.state = 0
+        AND funcCode = 'view'
+        AND loginName = #{loginName}
+    </select>
+
+</mapper>

@@ -4,11 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hejinyo.core.common.authorization.UserRealm;
-import com.hejinyo.other.domain.Account;
 import com.hejinyo.core.common.utils.JsonRetrun;
+import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.other.domain.Account;
 import com.hejinyo.other.domain.Sys_Dto;
-import com.hejinyo.core.domain.pojo.Sys_Menu;
-import com.hejinyo.core.domain.pojo.Sys_User;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
@@ -260,12 +259,6 @@ public class TestController {
 
     }
 
-    @RequestMapping(value = "/anonPage")
-    @ResponseBody
-    public Map<String, Object> anonPage() {
-        return JsonRetrun.result(1, "你无权限！");
-    }
-
     @RequestMapping(value = "/needquery", produces = "application/json")
     @ResponseBody
     public Map<String, Object> needquery() {
@@ -316,7 +309,7 @@ public class TestController {
     @RequestMapping(value = "/clearCached", produces = "application/json")
     @ResponseBody
     public Map<String, Object> clearCached() {
-        userRealm.clearAllCachedAuthenticationInfo();
+        userRealm.clearAllCache();
         return JsonRetrun.result(0, "清除缓存成功！");
     }
 
@@ -331,15 +324,15 @@ public class TestController {
 
     @RequestMapping("/testDto3")
     @ResponseBody
-    public Sys_Menu testDto3(Sys_Menu sys_dto) {
+    public SysUser testDto3(SysUser sys_dto) {
         //System.out.println(sys_dto.getSys_menu().getMname());
-        System.out.println(sys_dto.getMname());
+        System.out.println(sys_dto.getLoginName());
         return sys_dto;
     }
 
     @RequestMapping("/testDto2")
     @ResponseBody
-    public Sys_User testDto2(Sys_User sys_user) {
+    public SysUser testDto2(SysUser sys_user) {
         //System.out.println(sys_dto.getSys_menu().getMname());
         System.out.println(sys_user.toString());
         return sys_user;

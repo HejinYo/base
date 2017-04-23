@@ -25,11 +25,10 @@ dependencies {
     //应用格式2: compile/testCompile group: 'packageName', name: 'artifactId', version: 'version'
     testCompile group: 'junit', name: 'junit', version: '4.12' //测试时
     /* Start LOG */
-    //compile 'org.slf4j:slf4j-nop:1.7.22'
-    compile 'org.apache.logging.log4j:log4j-jcl:2.3'//运行时
-    compile 'org.apache.logging.log4j:log4j-core:2.3'//运行时
-    compile 'org.slf4j:slf4j-nop:1.7.23'
-
+    compile 'org.apache.logging.log4j:log4j-core:2.8.2'
+    compile 'org.apache.logging.log4j:log4j-web:2.8.2'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
+    compile 'org.slf4j:jcl-over-slf4j:1.7.25'
     /* End Log */
     /* Start database pool */
     compile 'com.alibaba:druid:1.0.29'
@@ -61,7 +60,7 @@ dependencies {
     compile 'com.github.penggle:kaptcha:2.3.2'
     // https://mvnrepository.com/artifact/com.octo.captcha/jcaptcha
     compile group: 'com.octo.captcha', name: 'jcaptcha', version: '1.0'
-    
+
     /* End 验证码 */
     /* Start json */
     compile 'com.alibaba:fastjson:1.2.30'

@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <a class="refresh" href="#" title="点击刷新" tabindex="-1">
-                            <img id="checkImg" src="/verifyImg">
+                            <img id="checkImg" src="/verifyImg" >
                         </a>
                     </div>
                     <div>

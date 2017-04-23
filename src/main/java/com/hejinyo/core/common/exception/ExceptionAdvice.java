@@ -1,8 +1,9 @@
 package com.hejinyo.core.common.exception;
 
 import com.hejinyo.core.common.utils.JsonRetrun;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -20,7 +21,7 @@ import java.io.StringWriter;
 
 @ControllerAdvice
 public class ExceptionAdvice {// ResponseEntityExceptionHandler
-    private static Logger logger = LogManager.getLogger(ExceptionAdvice.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(ExceptionAdvice.class.getName());
 
     /**
      * 400 - Bad Request
@@ -57,6 +58,30 @@ public class ExceptionAdvice {// ResponseEntityExceptionHandler
     @ExceptionHandler(value = {Exception.class, RuntimeException.class})
     public Object e(Exception ex, HttpServletRequest request) {
         return exceptionReturn(ex, request, "系统内部发生错误！");
+    }
+
+    /**
+     * 401 UNAUTHORIZED
+     */
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({UnauthorizedException.class})
+    public Object shiroException(Exception ex, HttpServletRequest request) {
+        String accept = request.getHeader("accept");//指定客户端能够接收的内容类型
+        String content = request.getHeader("content-type");//请求的与实体对应的MIME信息
+        String getHeaderX = request.getHeader("X-Requested-With");//Jquery AJAX特有的一个参数
+        if (accept != null && !(accept.indexOf("application/json") > -1 ||
+                (getHeaderX != null && getHeaderX.indexOf("XMLHttpRequest") > -1) ||
+                (content != null && content.indexOf("application/json") > -1))) {
+            String page = "common/401";
+            ModelAndView mv = new ModelAndView(page);
+            mv.addObject("excode", 1);
+            mv.addObject("message", "无权限访问！");
+            return mv;
+        } else {
+            logger.debug(ex.toString(), ex);//日志记录，ModelAndView 不用设置。
+            return JsonRetrun.exception(1, "无权限访问！");
+        }
     }
 
     /**
