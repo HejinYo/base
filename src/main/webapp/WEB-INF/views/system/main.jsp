@@ -255,7 +255,7 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs">${username}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -267,7 +267,7 @@
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
+                            <SysMenuMenu Body -->
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
@@ -282,7 +282,7 @@
                                 </div>
                                 <!-- /.row -->
                             </li>
-                            <!-- Menu Footer-->
+                            <SysMenuMenu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -333,8 +333,8 @@
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>

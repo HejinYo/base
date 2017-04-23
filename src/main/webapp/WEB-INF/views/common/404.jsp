@@ -8,7 +8,7 @@
 <!--<![endif]-->
 <!-- start: HEAD -->
 <%-- Start: COMMON RESOURCES --%>
-<%@ include file="/resources/js/common/commonresource.jsp" %>
+<%@ include file="/resources/dist/js/common/commonresource.jsp" %>
 <%-- End : COMMON RESOURCES --%>
 <!-- end: HEAD -->
 <!-- start: BODY -->

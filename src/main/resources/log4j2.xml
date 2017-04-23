@@ -12,7 +12,7 @@
         <Property name="log_file_name">${log_home}/${application_name}/${application_name}.log</Property>
         <Property name="log_rolling_file_name">${log_home}/${application_name}/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}-%i.log</Property>
         <Property name="log_pattern_file">[%p]-%d{yyyy-MM-dd HH:mm:ss.SSS} %t %c - {%m}%n</Property>
-        <Property name="log_pattern_console">%d{yyyy-MM-dd HH:mm:ss} %p %c - {%m}%n</Property>
+        <Property name="log_pattern_console">%d{HH:mm:ss} %-5p { %m } - [%c] %n</Property>
         <!--数据库参数-->
         <!--<Property name="db.tableName">tg_c_log</Property>
         <Property name="db.connectionFactoryClass">com.turingoal.common.support.jdbc.TgSystemConnectionFactory</Property>
@@ -60,18 +60,30 @@
         <!-- Root -->
         <Root level="${root_level}" includeLocation="false">
             <AppenderRef ref="Console" level="DEBUG"/>
-           <!-- <AppenderRef ref="AsyncRollingRandomAccessFile" level="DEBUG"/>--><!--暂不存放在日志文件中-->
+            <!-- <AppenderRef ref="AsyncRollingRandomAccessFile" level="DEBUG"/>--><!--暂不存放在日志文件中-->
         </Root>
 
         <Logger name="org.springframework" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="AsyncRollingRandomAccessFile"/>-->
         </Logger>
-        <Logger name="com.hejinyo.core.mapper" level="DEBUG" additivity="false">
+        <Logger name="com.hejinyo.core.mapper" level="trace" additivity="false">
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="AsyncRollingRandomAccessFile" />-->
         </Logger>
-        <Logger name="org.mybatis" level="ERROR" additivity="false">
+        <Logger name="org.apache.ibatis.io.DefaultVFS" level="ERROR" additivity="false">
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="AsyncRollingRandomAccessFile"/>-->
+        </Logger>
+        <Logger name="org.quartz" level="ERROR" additivity="false">
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="AsyncRollingRandomAccessFile"/>-->
+        </Logger>
+        <Logger name="net.sf.ehcache.Cache" level="ERROR" additivity="false">
+            <AppenderRef ref="Console"/>
+            <!--<AppenderRef ref="AsyncRollingRandomAccessFile"/>-->
+        </Logger>
+        <Logger name="org.apache.shiro.web.servlet.SimpleCookie" level="ERROR" additivity="false">
             <AppenderRef ref="Console"/>
             <!--<AppenderRef ref="AsyncRollingRandomAccessFile"/>-->
         </Logger>

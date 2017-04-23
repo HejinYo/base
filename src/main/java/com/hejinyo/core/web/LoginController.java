@@ -2,29 +2,18 @@ package com.hejinyo.core.web;
 
 import com.alibaba.fastjson.JSON;
 import com.hejinyo.core.common.jcaptcha.JCaptcha;
-import com.hejinyo.core.domain.dto.ActiveUser;
-import com.hejinyo.core.domain.pojo.Sys_Menu;
-import com.hejinyo.core.domain.pojo.Sys_Resource;
-import com.hejinyo.core.domain.pojo.Sys_User;
-import com.hejinyo.core.common.utils.Const;
 import com.hejinyo.core.common.utils.JsonRetrun;
+import com.hejinyo.core.domain.pojo.SysUser;
 import jodd.util.StringUtil;
-import net.sf.json.JSONObject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.transform.Source;
-import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -109,7 +98,7 @@ public class LoginController {
     public ModelAndView loginPost(HttpServletRequest request, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         Subject subject = SecurityUtils.getSubject();
-        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+        SysUser activeUser = (SysUser) subject.getPrincipal();
         mv.addObject("username", activeUser.getUserName());
         mv.setViewName("system/main");
         return mv;

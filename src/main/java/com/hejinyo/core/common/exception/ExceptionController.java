@@ -5,14 +5,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class ExceptionController {
+
+    @RequestMapping(value = "/401")
+    public ModelAndView anonPage(HttpServletRequest request, HttpServletResponse response) {
+        return exceptionReturn(request, response, 401);
+    }
 
     @RequestMapping(value = "/404")
     public ModelAndView error_404(HttpServletRequest request, HttpServletResponse response) {
@@ -33,7 +40,10 @@ public class ExceptionController {
                 (content != null && content.indexOf("application/json") > -1))) {
             String page = "common/404";
             String message = "页面没有找到！";
-            if (HttpStatus.INTERNAL_SERVER_ERROR.value() == code) {
+            if (HttpStatus.UNAUTHORIZED.value() == code) {
+                page = "common/401";
+                message = "无访问权限！";
+            } else if (HttpStatus.INTERNAL_SERVER_ERROR.value() == code) {
                 page = "common/error";
                 message = "服务器内部发生错误！";
             }
@@ -45,7 +55,9 @@ public class ExceptionController {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);//设置ContentType，返回内容的MIME类型
             response.setHeader("Cache-Control", "no-cache");//告诉所有的缓存机制是否可以缓存及哪种类型
             String json = JsonRetrun.exceptionToString(1, "请求连接不存在");
-            if (HttpStatus.INTERNAL_SERVER_ERROR.value() == code) {
+            if (HttpStatus.UNAUTHORIZED.value() == code) {
+                json = JsonRetrun.exceptionToString(1, "无访问权限！");
+            }else if (HttpStatus.INTERNAL_SERVER_ERROR.value() == code) {
                 json = JsonRetrun.exceptionToString(1, "服务器内部发生错误！");
             }
             try {

@@ -1,11 +1,7 @@
 package com.hejinyo.core.common.authorization;
 
-import com.hejinyo.core.common.utils.JsonRetrun;
-import com.hejinyo.core.domain.dto.ActiveUser;
-import com.hejinyo.core.domain.dto.Menu;
-import com.hejinyo.core.domain.pojo.Sys_Resource;
-import com.hejinyo.core.domain.pojo.Sys_User;
-import com.hejinyo.core.service.UserService;
+import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.service.SysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -13,12 +9,10 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 自定义用户登录Realm
@@ -30,8 +24,10 @@ import java.util.Map;
  */
 public class UserRealm extends AuthorizingRealm {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserRealm.class);
+
     @Resource
-    private UserService userService;
+    private SysUserService sysUserService;
 
     /**
      * 支持什么类型的token
@@ -54,41 +50,16 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String loginName = (String) token.getPrincipal();//从Token中获取身份信息
-        ActiveUser activeUser = userService.findActiveUser(loginName);//根据登录名查询用户信息
+        SysUser activeUser = sysUserService.findByLoginName(loginName);//根据登录名查询用户信息
         if (null == activeUser || -1 == activeUser.getState()) {// 如果无相关用户或已删除则返回null
+            logger.debug("登录名：["+loginName+"],尝试登录，无此用户！");
             return null;
         } else if (1 == activeUser.getState()) {//是否锁定
+            logger.debug("登录名：["+loginName+"],尝试登录，状态为锁定！");
             throw new LockedAccountException(); //抛出帐号锁定异常
         }
-       /* //身份
-        //所有菜单
-        List<Menu> menus = activeUser.getMenus();
-        Map<String, Object> map = new HashMap<String, Object>();
-        //一级菜单
-        List<Menu> menu1 = new ArrayList<Menu>();
-        //二级菜单
-        List<Menu> menu2 = new ArrayList<Menu>();
-        //三级菜单
-        List<Menu> menu3 = new ArrayList<Menu>();
 
-        for (int i = 0; i < menus.size(); i++) {
-            int level = menus.get(i).getMlevel();
-            if (1 == level) {
-                menu1.add(menus.get(i));
-            } else if (2 == level) {
-                menu2.add(menus.get(i));
-            } else if (3 == level) {
-                menu3.add(menus.get(i));
-            }
-        }
-        map.put("menu1", menu1);
-        map.put("menu2", menu2);
-        map.put("menu3", menu3);
-        String json = JsonRetrun.resultToString(0, map);
-        System.out.println("==========================================");
-        System.out.println(json);*/
-
-        String password = activeUser.getPassword();//获取用户数据库中密码
+        String password = activeUser.getLoginPwd();//获取用户数据库中密码
         String salt = activeUser.getLoginSalt();//获取用户盐
         // 返回认证信息由父类AuthenticatingRealm进行认证
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(activeUser, password, ByteSource.Util.bytes(salt), getName());
@@ -103,15 +74,13 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        SysUser ActiveUser = (SysUser) principals.getPrimaryPrincipal();
+        String loginName = ActiveUser.getLoginName();
         //获取用户权限
-        List<String> permissions = new ArrayList<>();
-        permissions.add("user:create");
-        //构建shiro授权信息
-        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        for (String sysPermission : permissions) {
-            simpleAuthorizationInfo.addStringPermission(sysPermission);
-        }
-        return simpleAuthorizationInfo;
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        authorizationInfo.addRoles(sysUserService.findRoleSet(loginName));
+        authorizationInfo.addStringPermissions(sysUserService.findFuncSet(loginName));
+        return authorizationInfo;
 
     }
 

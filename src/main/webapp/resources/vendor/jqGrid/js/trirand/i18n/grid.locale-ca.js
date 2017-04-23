@@ -122,7 +122,7 @@ $.jgrid.regional["ca"] = {
 		errcap : "Error",
 		nourl : "No s'ha especificat una URL",
 		norecords: "No hi ha dades per processar",
-		model : "Les columnes de noms són diferents de les columnes del domain"
+		model : "Les columnes de noms són diferents de les columnes del model"
 	},
 	formatter : {
 		integer : {thousandsSeparator: ".", defaultValue: '0'},

@@ -6,6 +6,8 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 1.0
  */
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
+    private static final Logger logger = LoggerFactory.getLogger(UserRealm.class);
 
     private Cache<String, AtomicInteger> loginRecordCache;
 
@@ -35,6 +38,8 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             loginRecordCache.put(username, retryCount);
         }
         if (retryCount.incrementAndGet() > 5) {//每次执行登录增加一次，大于5次，抛出异常
+
+            logger.debug("登录名：[" + username + "],登录失败次数："+retryCount);
             throw new ExcessiveAttemptsException();
         }
         boolean matches = super.doCredentialsMatch(token, info);

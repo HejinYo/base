@@ -1,15 +1,13 @@
 package com.hejinyo.other.domain;
 
-import com.hejinyo.core.domain.pojo.Sys_Menu;
-import com.hejinyo.core.domain.pojo.Sys_User;
+import com.hejinyo.core.domain.pojo.SysUser;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
 public class Sys_Dto implements Serializable {
-    private Sys_Menu sys_menu;
-    private Sys_User sys_user;
+    private SysUser sys_user;
     private String test;
     private int mid;
     private int xid;

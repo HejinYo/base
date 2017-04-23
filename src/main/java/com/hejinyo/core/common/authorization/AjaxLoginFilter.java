@@ -3,10 +3,8 @@ package com.hejinyo.core.common.authorization;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hejinyo.core.common.jcaptcha.JCaptcha;
-import com.hejinyo.core.domain.dto.ActiveUser;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
@@ -33,7 +31,7 @@ import static com.hejinyo.core.common.utils.Tools.base64Decoder;
  * @Description : Ajax登录拦截器
  */
 public class AjaxLoginFilter extends AuthenticatingFilter {
-    private static final Logger log = LoggerFactory.getLogger(FormAuthenticationFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(FormAuthenticationFilter.class);
 
     public static final String DEFAULT_USERNAME_PARAM = "username";
     public static final String DEFAULT_PASSWORD_PARAM = "password";
@@ -176,8 +174,8 @@ public class AjaxLoginFilter extends AuthenticatingFilter {
             this.appliedPaths.remove(previous);
         }
         super.setLoginUrl(loginUrl);//设置表单拦截中的登录地址
-        if (log.isTraceEnabled()) {
-            log.trace("Adding login url to applied paths.");
+        if (logger.isTraceEnabled()) {
+            logger.trace("Adding login url to applied paths.");
         }
         this.appliedPaths.put(getLoginUrl(), null);
     }
@@ -204,9 +202,9 @@ public class AjaxLoginFilter extends AuthenticatingFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         if (isLoginRequest(request, response)) {//检测是否是登录请求
             if (isLoginSubmission(request, response)) {//如果是POST方式请求
-                if (log.isTraceEnabled()) {
-                    log.trace("Login submission detected.  Attempting to execute login.");
-                    log.trace("检测到登录提交,尝试执行登录..");
+                if (logger.isTraceEnabled()) {
+                    logger.trace("Login submission detected.  Attempting to execute login.");
+                    logger.trace("检测到登录提交,尝试执行登录..");
                 }
                 getRequestBodyData(WebUtils.toHttp(request));//获取request body中的数据。
 
@@ -220,14 +218,14 @@ public class AjaxLoginFilter extends AuthenticatingFilter {
                 }
                 return true;
             } else {
-                if (log.isTraceEnabled()) {
-                    log.trace("Login page view.");
+                if (logger.isTraceEnabled()) {
+                    logger.trace("Login page view.");
                 }
                 return true;//如果是非POST请求，将展示登录页面
             }
         } else {//不是登录请求，将被重定向到登录页面
-            if (log.isTraceEnabled()) {
-                log.trace("Attempting to access a path which requires authentication.  Forwarding to the " +
+            if (logger.isTraceEnabled()) {
+                logger.trace("Attempting to access a path which requires authentication.  Forwarding to the " +
                         "Authentication url [" + getLoginUrl() + "]");
             }
             //保存当前地址并重定向到登录界面
@@ -281,8 +279,8 @@ public class AjaxLoginFilter extends AuthenticatingFilter {
      */
     @Override
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
-        if (log.isDebugEnabled()) {
-            log.debug("Authentication exception", e);
+        if (logger.isDebugEnabled()) {
+            logger.debug("Authentication exception", e);
         }
         setFailureAttribute(request, e);
         //登录失败，让请求继续返回登录页面：
@@ -331,7 +329,7 @@ public class AjaxLoginFilter extends AuthenticatingFilter {
             sb.append(temp);
         }
         String str = sb.toString();//获取request body中的json字符串
-        System.out.println(str);
+        logger.debug("Ajax登录信息：" + str);
         JSONObject json = JSON.parseObject(str);
         String username = json.getString(getUsernameParam());//从json对像中获取用户名
         String password = json.getString(getPasswordParam());//获取密码
