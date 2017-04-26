@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!DOCTYPE html>
 <!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
 <!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
@@ -7,6 +11,7 @@
 <!--<![endif]-->
 <!-- start: HEAD -->
 <head>
+    <base href="<%=basePath%>"/>
     <title>HejinYo - Responsive Admin Template</title>
     <%-- Start: COMMON RESOURCES --%>
     <%@ include file="/resources/dist/js/common/commonresource.jsp" %>

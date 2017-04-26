@@ -27,7 +27,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String to_login() {
-        return "system/login";
+        return "core/login";
     }
 
     /**

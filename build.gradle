@@ -24,6 +24,12 @@ dependencies {
     //compile fileTree(dir: 'lib', include: ['*.jar'])  //导入本地jar包
     //应用格式1: compile/testCompile packageName:artifactId:version
     //应用格式2: compile/testCompile group: 'packageName', name: 'artifactId', version: 'version'
+    //compile 代码和编译所需的依赖。
+    //runtime 产品代码在运行时需要的依赖，默认，也会包含compile中的依赖。
+    //testCompile 编译测试代码时所需要的依赖，默认，被编译的产品代码和产品代码需要的编译依赖也属于该分组。
+    //testRuntime 运行测试时需要的依赖。默认，包含compile，runtime和testCompile的分组的构建和依赖。
+    //做web开发时需要servlet的依赖，但是只是编译阶段，运行时servlet依赖由servlet容器来提供。
+    //providedCompile , providedRuntime，它们对依赖的使用范围定义和compile以及runtime一致，只不过依赖的Jar包不会被加到War包里面。
     testCompile group: 'junit', name: 'junit', version: '4.12' //测试时
     /* Start LOG */
     compile 'org.apache.logging.log4j:log4j-core:2.8.2'
@@ -45,8 +51,8 @@ dependencies {
     compile 'taglibs:standard:1.1.2'
     //providedRuntime 'org.apache.tomcat:juli:6.0.48'
     //compile 'javax.servlet:jstl:1.2'
-    providedRuntime 'jstl:jstl:1.2' //运行时
-    providedCompile 'javax.servlet:javax.servlet-api:3.1.0' // 编译期
+    compile 'jstl:jstl:1.2' //运行时
+    compile 'javax.servlet:javax.servlet-api:3.1.0' // 编译期
     /* End Servlet web */
     /* Start Spring */
     compile 'org.springframework:spring-jdbc:4.3.7.RELEASE'
@@ -107,10 +113,14 @@ sourceSets {
 }
 //jetty内置容器插件运行配置
 jettyRun {
-    //访问端口号
-    httpPort = 8080
     //访问项目名称
     contextPath = '/'
+    //访问端口号
+    httpPort = 8080
+    //扫描静态资源的间隔时间
+    scanIntervalSeconds 1
+    //自动重新加载静态源
+    reload "automatic"
 }
 //版本控制
 task wrapper(type: Wrapper) {
@@ -118,5 +128,5 @@ task wrapper(type: Wrapper) {
 }
 //使用UTF-8完成任务，解决jetty等插件乱码问题
 tasks.withType(JavaCompile) {
-options.encoding = "UTF-8"
+    options.encoding = "UTF-8"
 }
