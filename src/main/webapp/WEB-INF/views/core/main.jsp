@@ -10,18 +10,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 2 | Dashboard</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <!-- 告诉浏览器响应屏幕宽度 -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="resources/plugins/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="resources/plugins/ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="resources/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+    <!-- AdminLTE皮肤. 选择皮肤从 css/skins 文件夹，而不是下载所有的，以减少负载. -->
     <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
@@ -49,30 +48,30 @@
     <header class="main-header">
         <!-- Logo -->
         <a href="index2.html" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <!-- 侧边栏的mini logo 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
-            <!-- logo for regular state and mobile devices -->
+            <!-- 常规状态和移动设备的标志 -->
             <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
-        <!-- Header Navbar: style can be found in header.less -->
+        <!-- Header Navbar 标题导航栏: 样式可以在header.less中找到 -->
         <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
+            <!-- 侧边栏切换按钮-->
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
+                    <!-- Messages: style 可以在dropdown.less中找到-->
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
+                            <li class="header">你有 4 条消息</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
+                                <!-- inner menu: 包含实际数据 -->
                                 <ul class="menu">
                                     <li><!-- start message -->
                                         <a href="#">
@@ -87,67 +86,19 @@
                                         </a>
                                     </li>
                                     <!-- end message -->
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="resources/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                AdminLTE Design Team
-                                                <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="resources/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Developers
-                                                <small><i class="fa fa-clock-o"></i> Today</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="resources/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Sales Department
-                                                <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="resources/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <h4>
-                                                Reviewers
-                                                <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
+                            <li class="footer"><a href="#">查看所有消息</a></li>
                         </ul>
                     </li>
-                    <!-- Notifications: style can be found in dropdown.less -->
+                    <!-- Notifications: style 可以在dropdown.less中找到-->
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning">10</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
+                            <li class="header">您有10个通知</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -156,40 +107,19 @@
                                             <i class="fa fa-users text-aqua"></i> 5 new members joined today
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                            page and may cause design problems
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-red"></i> 5 new members joined
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-red"></i> You changed your username
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
                     </li>
-                    <!-- Tasks: style can be found in dropdown.less -->
+                    <!-- Tasks: style 可以在dropdown.less中找到 -->
                     <li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-flag-o"></i>
                             <span class="label label-danger">9</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
+                            <li class="header">你有9个任务</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
@@ -207,52 +137,10 @@
                                         </a>
                                     </li>
                                     <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Create a nice theme
-                                                <small class="pull-right">40%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Some task I need to do
-                                                <small class="pull-right">60%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">60% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Make beautiful transitions
-                                                <small class="pull-right">80%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">80% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
                                 </ul>
                             </li>
                             <li class="footer">
-                                <a href="#">View all tasks</a>
+                                <a href="#">查看所有任务</a>
                             </li>
                         </ul>
                     </li>
@@ -266,39 +154,38 @@
                             <!-- User image -->
                             <li class="user-header">
                                 <img src="resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    HejinYo - Web Developer
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
-                            <SysMenuMenu Body -->
+                            <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
+                                        <a href="#">粉丝</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Sales</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
+                                        <a href="#">好友</a>
                                     </div>
                                 </div>
                                 <!-- /.row -->
                             </li>
-                            <SysMenuMenu Footer-->
+                            <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="#" class="btn btn-default btn-flat">简介</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="logout" class="btn btn-default btn-flat">退出</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
-                    <!-- Control Sidebar Toggle Button -->
+                    <!-- 控制侧栏切换按钮 -->
                     <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
@@ -306,24 +193,24 @@
             </div>
         </nav>
     </header>
-    <!-- Left side column. contains the logo and sidebar -->
+    <!-- 左侧栏. 包含徽标和侧边栏 -->
     <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- sidebar 侧边栏: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
+            <!-- Sidebar user panel 侧边栏的用户面板-->
             <div class="user-panel">
                 <div class="pull-left image">
                     <img src="resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>HejinYo</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
             <!-- search form -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <input type="text" name="q" class="form-control" placeholder="搜索...">
                     <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -331,39 +218,39 @@
                 </div>
             </form>
             <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <!-- sidebar menu 侧边栏菜单: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">主导航</li>
                 <li class="active treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <i class="fa fa-dashboard"></i> <span>仪表板</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                        <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> 仪表板 v1</a></li>
+                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> 仪表板 v2</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-files-o"></i>
-                        <span>Layout Options</span>
+                        <span>布局选项</span>
                         <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="resources/pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                        <li><a href="resources/pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 顶部导航</a></li>
                         <li><a href="resources/pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
                         <li><a href="resources/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                        <li><a href="resources/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                        <li><a href="resources/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 折叠侧栏</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="resources/pages/widgets.html">
-                        <i class="fa fa-th"></i> <span>Widgets</span>
+                        <i class="fa fa-th"></i> <span>小部件</span>
                         <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>
@@ -372,7 +259,7 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-pie-chart"></i>
-                        <span>Charts</span>
+                        <span>图表</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -387,7 +274,7 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-laptop"></i>
-                        <span>UI Elements</span>
+                        <span>UI元素</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -403,7 +290,7 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-edit"></i> <span>Forms</span>
+                        <i class="fa fa-edit"></i> <span>表单</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -422,13 +309,13 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="resources/pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                        <li><a href="resources/pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                        <li><a href="resources/pages/tables/simple.html"><i class="fa fa-circle-o"></i> 简单表格</a></li>
+                        <li><a href="resources/pages/tables/data.html"><i class="fa fa-circle-o"></i> 数据表格</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="resources/pages/calendar.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
+                        <i class="fa fa-calendar"></i> <span>日历</span>
                         <span class="pull-right-container">
               <small class="label pull-right bg-red">3</small>
               <small class="label pull-right bg-blue">17</small>
@@ -437,7 +324,7 @@
                 </li>
                 <li>
                     <a href="resources/pages/mailbox/mailbox.html">
-                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                        <i class="fa fa-envelope"></i> <span>邮箱</span>
                         <span class="pull-right-container">
               <small class="label pull-right bg-yellow">12</small>
               <small class="label pull-right bg-green">16</small>
@@ -447,81 +334,81 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-folder"></i> <span>Examples</span>
+                        <i class="fa fa-folder"></i> <span>实例</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="resources/pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                        <li><a href="resources/pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                        <li><a href="resources/pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                        <li><a href="resources/pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                        <li><a href="resources/pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                        <li><a href="resources/pages/examples/invoice.html"><i class="fa fa-circle-o"></i> 账单</a></li>
+                        <li><a href="resources/pages/examples/profile.html"><i class="fa fa-circle-o"></i> 简介</a></li>
+                        <li><a href="resources/pages/examples/login.html"><i class="fa fa-circle-o"></i> 登录</a></li>
+                        <li><a href="resources/pages/examples/register.html"><i class="fa fa-circle-o"></i> 注册</a></li>
+                        <li><a href="resources/pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> 锁屏</a></li>
                         <li><a href="resources/pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
                         <li><a href="resources/pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                        <li><a href="resources/pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                        <li><a href="resources/pages/examples/blank.html"><i class="fa fa-circle-o"></i> 空白页</a></li>
                         <li><a href="resources/pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-share"></i> <span>Multilevel</span>
+                        <i class="fa fa-share"></i> <span>多级菜单</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> 一级</a></li>
                         <li>
-                            <a href="#"><i class="fa fa-circle-o"></i> Level One
+                            <a href="#"><i class="fa fa-circle-o"></i> 一级
                                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i> 二级</a></li>
                                 <li>
-                                    <a href="#"><i class="fa fa-circle-o"></i> Level Two
+                                    <a href="#"><i class="fa fa-circle-o"></i> 二级
                                         <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                                     </a>
                                     <ul class="treeview-menu">
-                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                        <li><a href="#"><i class="fa fa-circle-o"></i> 三级</a></li>
+                                        <li><a href="#"><i class="fa fa-circle-o"></i> 三级</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> 一级</a></li>
                     </ul>
                 </li>
-                <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+                <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>文件</span></a></li>
                 <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>重要</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>警告</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>信息</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. 包含页面内容 -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+        <!-- Content Header (页面标题) -->
         <section class="content-header">
             <h1>
-                Dashboard
-                <small>Control panel</small>
+                仪表板
+                <small>控制面板</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li class="active">仪表板</li>
             </ol>
         </section>
 
-        <!-- Main content -->
+        <!-- 主要内容 -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
@@ -531,12 +418,12 @@
                         <div class="inner">
                             <h3>150</h3>
 
-                            <p>New Orders</p>
+                            <p>新订单</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -546,12 +433,12 @@
                         <div class="inner">
                             <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                            <p>Bounce Rate</p>
+                            <p>跳出率</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -561,12 +448,12 @@
                         <div class="inner">
                             <h3>44</h3>
 
-                            <p>User Registrations</p>
+                            <p>用户注册</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -576,12 +463,12 @@
                         <div class="inner">
                             <h3>65</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>独特访客</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -612,7 +499,7 @@
                         <div class="box-header">
                             <i class="fa fa-comments-o"></i>
 
-                            <h3 class="box-title">Chat</h3>
+                            <h3 class="box-title">聊天</h3>
 
                             <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
                                 <div class="btn-group" data-toggle="btn-toggle">
@@ -630,21 +517,19 @@
                                 <p class="message">
                                     <a href="#" class="name">
                                         <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
-                                        Mike Doe
+                                        迈克·多恩
                                     </a>
-                                    I would like to meet you to discuss the latest news about
-                                    the arrival of the new theme. They say it is going to be one the
-                                    best themes on the market
+                                    我想见到你，讨论有关新主题到来的最新消息。他们说这将是市场上最好的主题
                                 </p>
                                 <div class="attachment">
-                                    <h4>Attachments:</h4>
+                                    <h4>附件:</h4>
 
                                     <p class="filename">
                                         Theme-thumbnail-image.jpg
                                     </p>
 
                                     <div class="pull-right">
-                                        <button type="button" class="btn btn-primary btn-sm btn-flat">Open</button>
+                                        <button type="button" class="btn btn-primary btn-sm btn-flat">打开</button>
                                     </div>
                                 </div>
                                 <!-- /.attachment -->
@@ -657,11 +542,9 @@
                                 <p class="message">
                                     <a href="#" class="name">
                                         <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
-                                        Alexander Pierce
+                                        HejinYo
                                     </a>
-                                    I would like to meet you to discuss the latest news about
-                                    the arrival of the new theme. They say it is going to be one the
-                                    best themes on the market
+                                    我想见到你，讨论有关新主题到来的最新消息。 他们说这将是市场上最好的主题之一
                                 </p>
                             </div>
                             <!-- /.item -->
@@ -1028,25 +911,25 @@
         reserved.
     </footer>
 
-    <!-- Control Sidebar -->
+    <!-- Control Sidebar 控制侧栏 -->
     <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
+        <!-- Create the tabs 创建选项卡 -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
             <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
             <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
-        <!-- Tab panes -->
+        <!-- Tab panes 标签窗格 -->
         <div class="tab-content">
-            <!-- Home tab content -->
+            <!-- Home tab content 主页标签内容 -->
             <div class="tab-pane" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <h3 class="control-sidebar-heading">近期活动</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="javascript:void(0)">
                             <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                                <h4 class="control-sidebar-subheading">兰登的生日</h4>
 
                                 <p>Will be 23 on April 24th</p>
                             </div>
@@ -1057,7 +940,7 @@
                             <i class="menu-icon fa fa-user bg-yellow"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                                <h4 class="control-sidebar-subheading">Frodo更新了他的个人资料</h4>
 
                                 <p>New phone +1(800)555-1234</p>
                             </div>
@@ -1235,7 +1118,7 @@
 <!-- Bootstrap 3.3.6 -->
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="resources/plugins/raphael/raphael.min.js"></script>
 <script src="resources/plugins/morris/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="resources/plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -1245,7 +1128,7 @@
 <!-- jQuery Knob Chart -->
 <script src="resources/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="resources/plugins/moment/moment.min.js"></script>
 <script src="resources/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="resources/plugins/datepicker/bootstrap-datepicker.js"></script>

@@ -100,7 +100,7 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         SysUser activeUser = (SysUser) subject.getPrincipal();
         mv.addObject("username", activeUser.getUserName());
-        mv.setViewName("system/main");
+        mv.setViewName("core/main");
         return mv;
     }
 }
