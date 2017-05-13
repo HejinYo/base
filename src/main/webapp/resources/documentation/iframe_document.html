@@ -23,68 +23,8 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="skin-blue fixed" data-spy="scroll" data-target="#scrollspy">
+  <body class="hold-transition skin-blue layout-top-nav" data-spy="scroll" data-target="#scrollspy">
     <div class="wrapper">
-
-      <header class="main-header">
-        <!-- Logo -->
-        <!-- Logo -->
-        <a href="../index2.html" class="logo">
-          <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>A</b>LT</span>
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Admin</b>LTE</span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-          </a>
-          <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <li><a href="http://almsaeedstudio.com">Almsaeed Studio</a></li>
-              <li><a href="http://almsaeedstudio.com/premium">Premium Templates</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <div class="sidebar" id="scrollspy">
-
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="nav sidebar-menu">
-            <li class="header">目录</li>
-            <li class="active"><a href="#introduction"><i class="fa fa-circle-o"></i> 介绍</a></li>
-            <li><a href="#download"><i class="fa fa-circle-o"></i> 下载</a></li>
-            <li><a href="#dependencies"><i class="fa fa-circle-o"></i> 依赖</a></li>
-            <li><a href="#advice"><i class="fa fa-circle-o"></i>建议</a></li>
-            <li><a href="#layout"><i class="fa fa-circle-o"></i> 布局</a></li>
-            <li><a href="#adminlte-options"><i class="fa fa-circle-o"></i> Javascript选项</a></li>
-            <li class="treeview" id="scrollspy-components">
-              <a href="javascript:void(0)"><i class="fa fa-circle-o"></i> Components 组件</a>
-              <ul class="nav treeview-menu">
-                <li><a href="#component-main-header">Main Header 主标题</a></li>
-                <li><a href="#component-sidebar">Sidebar 侧边栏</a></li>
-                <li><a href="#component-control-sidebar">Control Sidebar 控制侧栏</a></li>
-                <li><a href="#component-info-box">信息框</a></li>
-                <li><a href="#component-box">Boxes</a></li>
-                <li><a href="#component-direct-chat">Direct Chat 直接聊天</a></li>
-              </ul>
-            </li>
-            <li><a href="#plugins"><i class="fa fa-circle-o"></i> Plugins 插件</a></li>
-            <li><a href="#browsers"><i class="fa fa-circle-o"></i> Browser Support 浏览器支持</a></li>
-            <li><a href="#upgrade"><i class="fa fa-circle-o"></i> Upgrade Guide 升级指南</a></li>
-            <li><a href="#implementations"><i class="fa fa-circle-o"></i> Implementations 实现</a></li>
-            <li><a href="#faq"><i class="fa fa-circle-o"></i> FAQ</a></li>
-            <li><a href="#license"><i class="fa fa-circle-o"></i> License</a></li>
-          </ul>
-        </div>
-        <!-- /.sidebar -->
-      </aside>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -94,10 +34,6 @@
             AdminLTE 文档
             <small>Version 2.3</small>
           </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">文档</li>
-          </ol>
         </div>
 
         <!-- Main content -->
@@ -2111,24 +2047,6 @@ AdminLTE/
         </div><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
-      <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.12
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-      </footer>
-
-      <!-- Control Sidebar -->
-      <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
-        <div class="pad">
-          This is an example of the control sidebar.
-        </div>
-      </aside><!-- /.control-sidebar -->
-      <!-- Add the sidebar's background. This div must be placed
-           immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
-
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.2.3 -->
@@ -2143,5 +2061,40 @@ AdminLTE/
     <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
   <!--  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>-->
     <script src="docs.js"></script>
+    <script src="/resources/plugins/pym/pym.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            var pymChild = new pym.Child({ renderCallback: drawGraphic });
+            pymChild.onMessage('navigate', onNavigateMessage);
+            pymChild.onMessage('navigate2', onNavigateMessage2);
+            function onNavigateMessage(url) {
+                pymChild.scrollParentToChildEl('downlocd');//子页面滚动
+            }
+            function onNavigateMessage2(url) {
+                pymChild.scrollParentToChildEl('component-main-header');//子页面滚动
+            }
+
+            $('#myLink').click(function(){
+                //pymChild.sendHeight();
+                //pymChild.sendMessage('navigate3', "ww.pymChild.com");
+                //pymChild.scrollParentTo('about');父页面滚动
+                pymChild.scrollParentToChildEl('dependencies');//子页面滚动
+            });
+
+            //当页面加载时，此函数将被调用一次，并且在窗口调整大小时再次调用。
+            /*pym.Child({renderCallback:myFunc});
+            function myFunc(){
+                alert("testLoad");
+            }*/
+
+            function drawGraphic(){//加载时的回调函数
+                //alert("testDraw");
+            }
+            document.addEventListener('pym:pym-initialized', function (e) {
+                console.log("pym-initialized event fired");
+                console.log(pym.autoInitInstances.length);
+            }, false);
+        });
+    </script>
   </body>
 </html>
