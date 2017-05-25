@@ -649,7 +649,7 @@
 <!-- end jqueryui tabs -->
 <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 <script type="text/javascript" src="<%=basePath%>resources/js/system/main_clip.js"></script>
-<script type="text/javascript" src="<%=basePath%>resources/js/system/main.js"></script>
+<script type="text/javascript" src="<%=basePath%>resources/js/system/app-main.js"></script>
 <!-- start: JavaScript Event Handlers for this page -->
 <script>
     jQuery(document).ready(function () {

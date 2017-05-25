@@ -94,13 +94,13 @@ public class LoginController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/manage", method = RequestMethod.GET)
     public ModelAndView loginPost(HttpServletRequest request, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         Subject subject = SecurityUtils.getSubject();
         SysUser activeUser = (SysUser) subject.getPrincipal();
         mv.addObject("username", activeUser.getUserName());
-        mv.setViewName("core/main");
+        mv.setViewName("core/manage");
         return mv;
     }
 }

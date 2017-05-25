@@ -15,14 +15,14 @@
     <meta content="" name="author"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="description" content="此代码内容为超萌的猫头鹰登录界面"/>
-    <link rel="icon" href="resources/dist/img/common/favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="resources/dist/img/common/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="resources/assets/images/core/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="resources/assets/images/core/favicon.ico" type="image/x-icon"/>
     <title>用户登录</title>
-    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="resources/plugins/font-awesome/css/font-awesome.min.css" type="text/css"/>
-    <link rel="stylesheet" href="resources/plugins/toastr/toastr.min.css" media="screen">
-    <link rel="stylesheet" href="resources/plugins/poshytip/src/tip-blue/tip-blue.css" type="text/css"/>
-    <link rel="stylesheet" href="resources/dist/css/core/login.css"/>
+    <link rel="stylesheet" href="resources/vendor/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="resources/vendor/fontawesome/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="resources/vendor/toastr/toastr.min.css" media="screen">
+    <link rel="stylesheet" href="resources/vendor/poshytip/src/tip-blue/tip-blue.css" type="text/css"/>
+    <link rel="stylesheet" href="resources/assets/css/core/login.css"/>
 </head>
 <body>
 <!-- begin -->
@@ -84,14 +84,14 @@
             </form>
         </div>
     </div>
-    <script type="text/javascript" src="resources/plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" src="resources/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="resources/plugins/toastr/toastr.min.js"></script>
-    <script type="text/javascript" src="resources/plugins/poshytip/src/jquery.poshytip.min.js"></script>
-    <script type="text/javascript" src="resources/plugins/jQuery/jquery.json.js"></script>
-    <script type="text/javascript" src="resources/plugins/jQuery/jquery.base64.js"></script>
-    <script type="text/javascript" src="resources/dist/js/common/jquery-utils.js"></script>
-    <script type="text/javascript" src="resources/dist/js/core/login.js"></script>
+    <script type="text/javascript" src="resources/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="resources/vendor/toastr/toastr.min.js"></script>
+    <script type="text/javascript" src="resources/vendor/poshytip/src/jquery.poshytip.min.js"></script>
+    <script type="text/javascript" src="resources/vendor/jquery/jquery.json.js"></script>
+    <script type="text/javascript" src="resources/vendor/jquery/jquery.base64.js"></script>
+    <script type="text/javascript" src="resources/assets/common/jquery-utils.js"></script>
+    <script type="text/javascript" src="resources/assets/js/core/login.js"></script>
 </div>
 <!-- end -->
 </body>

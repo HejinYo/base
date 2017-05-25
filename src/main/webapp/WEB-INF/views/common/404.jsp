@@ -7,9 +7,20 @@
 <html lang="en">
 <!--<![endif]-->
 <!-- start: HEAD -->
-<%-- Start: COMMON RESOURCES --%>
-<%@ include file="/resources/dist/js/common/commonresource.jsp" %>
-<%-- End : COMMON RESOURCES --%>
+<link href="resources/assets/fonts/google-fonts.css" rel="stylesheet" type="text/css"/>
+<!-- end: GOOGLE FONTS -->
+<!-- start: MAIN CSS -->
+<link rel="stylesheet" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/vendor/fontawesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="resources/vendor/themify-icons/themify-icons.min.css">
+<link href="resources/vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
+<link href="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
+<link href="resources/vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
+<!-- end: MAIN CSS -->
+<!-- start: CLIP-TWO CSS -->
+<link rel="stylesheet" href="resources/assets/css/styles.css">
+<link rel="stylesheet" href="resources/assets/css/plugins.css">
+<link rel="stylesheet" href="resources/assets/css/themes/theme-1.css" id="skin_color"/>
 <!-- end: HEAD -->
 <!-- start: BODY -->
 <body>
