@@ -16,8 +16,8 @@ var Main = function() {
 		elem.on('click', 'a', function(e) {
 
 			_this = $(this);
-			if(isSidebarClosed() && !isSmallDevice() && !_this.closest("ul").hasClass("sub-menu"))
-				return;
+			/*if(isSidebarClosed() && !isSmallDevice() && !_this.closest("ul").hasClass("sub-menu"))
+				return;*/
             /*_this.closest("ul").find(".open").not(".active").children("ul").not(_this.next()).slideUp(200).parent('.open').removeClass("open");*/
             //打开一个多级菜单时关闭其他多级菜单，除了active
 			_this.closest("ul").find(".open").children("ul").not(_this.next()).slideUp(200).parent('.open').removeClass("open");
@@ -32,11 +32,28 @@ var Main = function() {
                 /**
                  * HejinYo 一级菜单active样式切换
                  */
-                _this.parents('.main-navigation-menu').find('li').removeClass('active');
+                var mainMenu = $('.main-navigation-menu');
+                var folderMenu = $('.folders');
+                var thisMenuCls = _this.parents('ul:last').attr('class');
+                if(thisMenuCls == 'main-navigation-menu'){//点击主菜单
+                    folderMenu.find('li').removeClass('active');
+                }else if(thisMenuCls == 'folders'){//点击附菜单
+                    mainMenu.find('li').removeClass('active');
+                    mainMenu.find(".open").children("ul").not(_this.next()).slideUp(200).parent('.open').removeClass("open");
+                }else if(thisMenuCls == 'sub-menu'){//隐藏侧边栏的菜单变化
+                    folderMenu.find('li').removeClass('active');
+                    mainMenu.find('li').removeClass('active');
+                    mainMenu.children('.hover').addClass('active');
+                }
+                _this.parents('ul:last').find('li').removeClass('active');
                 _this.parent('li').addClass('active');
-                var parentList = _this.parents('li:last:has(.sub-menu)');
-                if(parentList.length > 0){
-                    parentList.addClass('active');
+                if (!isSidebarClosed()) {//侧边栏显示,多级菜单的一级active处理
+                    var parentList = _this.parents('li:last:has(.sub-menu)');
+                    if (parentList.length > 0) {
+                        parentList.addClass('active');
+                    }
+                } else {//侧边栏隐藏
+                    //console.log(thisMenuCls);
                 }
             }
         });
