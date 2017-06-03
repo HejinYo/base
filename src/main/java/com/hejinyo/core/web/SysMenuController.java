@@ -1,10 +1,13 @@
 package com.hejinyo.core.web;
 
 import com.hejinyo.core.common.utils.JsonRetrun;
+import com.hejinyo.core.domain.dto.ActiveUser;
 import com.hejinyo.core.domain.dto.SysMenu;
 import com.hejinyo.core.service.SysResourceService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,33 +26,14 @@ public class SysMenuController {
     @Resource
     private SysResourceService sysResourceService;
 
-    @RequestMapping(value = "/mutilMenu", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public Map<String, Object> mutilMenu() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        //所有菜单
-        List<SysMenu> SysMenus = sysResourceService.getMenuByLoginName();
-        //一级菜单
-        List<SysMenu> menu1 = new ArrayList<SysMenu>();
-        //二级菜单
-        List<SysMenu> menu2 = new ArrayList<SysMenu>();
-        //三级菜单
-        List<SysMenu> menu3 = new ArrayList<SysMenu>();
-
-        for (int i = 0; i < SysMenus.size(); i++) {
-            int menuLevel = SysMenus.get(i).getMlevel();
-            if (menuLevel == 1) {
-                menu1.add(SysMenus.get(i));
-            } else if (menuLevel == 2) {
-                menu2.add(SysMenus.get(i));
-            } else if (menuLevel == 3) {
-                menu3.add(SysMenus.get(i));
-            }
-        }
-        map.put("menu1", menu1);
-        map.put("menu2", menu2);
-        map.put("menu3", menu3);
-        return JsonRetrun.result(0, "获取成功", map);
+    /**
+     * 编辑菜单
+     *
+     * @return
+     */
+    @RequestMapping(value = "editMenu", method = RequestMethod.GET)
+    public String editMenu() {
+        return "core/sys_menu";
     }
 
     /**
@@ -61,8 +45,10 @@ public class SysMenuController {
     @ResponseBody
     public Object menuTree() {
         JSONArray jsonArray = new JSONArray();
+        Subject subject = SecurityUtils.getSubject();
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
         //所有菜单
-        List<SysMenu> SysMenus = sysResourceService.getMenuByLoginName();
+        List<SysMenu> SysMenus = sysResourceService.getMenuList(activeUser.getLoginName());
         for (int i = 0; i < SysMenus.size(); i++) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id", String.valueOf(SysMenus.get(i).getMid()));

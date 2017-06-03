@@ -1,7 +1,7 @@
 package com.hejinyo.core.service.impl;
 
 import com.hejinyo.core.domain.dto.SysMenu;
-import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.domain.po.Sys_User;
 import com.hejinyo.core.mapper.SysResourceMapper;
 import com.hejinyo.core.service.SysResourceService;
 import org.apache.shiro.SecurityUtils;
@@ -23,9 +23,7 @@ public class SysResourceServiceImpl implements SysResourceService {
     private SysResourceMapper sysResourceMapper;
 
     @Override
-    public List<SysMenu> getMenuByLoginName() {
-        Subject subject = SecurityUtils.getSubject();
-        SysUser activeUser = (SysUser) subject.getPrincipal();
-        return sysResourceMapper.getMenuByLoginName(activeUser.getLoginName());
+    public List<SysMenu> getMenuList(String loginName) {
+        return sysResourceMapper.getMenuList(loginName);
     }
 }

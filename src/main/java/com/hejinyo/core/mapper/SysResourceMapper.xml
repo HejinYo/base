@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hejinyo.core.mapper.SysResourceMapper">
-    <resultMap id="BaseResourceMap" type="sysresource">
+    <resultMap id="BaseResourceMap" type="sys_resource">
         <id column="resId" jdbcType="INTEGER" property="resId"/>
         <result column="resType" jdbcType="VARCHAR" property="resType"/>
         <result column="resCode" jdbcType="VARCHAR" property="resCode"/>
@@ -13,7 +13,7 @@
         <result column="state" jdbcType="INTEGER" property="state"/>
         <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="createId" jdbcType="INTEGER" property="createId"/>
-        <collection property="function" ofType="sysfunction">
+        <collection property="function" ofType="sys_function">
             <id column="resCode" jdbcType="VARCHAR" property="resCode"/>
             <id column="funcCode" jdbcType="VARCHAR" property="funcCode"/>
             <result column="funcName" jdbcType="VARCHAR" property="funcName"/>
@@ -38,16 +38,9 @@
   </sql>
 
     <!-- 根据登录名获取菜单信息 -->
-    <select id="getMenuByLoginName" resultMap="BaseMenuMap" parameterType="String">
+    <select id="getMenuList" resultMap="BaseMenuMap" parameterType="String">
         SELECT
-        	sr.resId,
-        	sr.resCode,
-        	resName,
-        	resPid,
-        	resLevel,
-        	resIcon,
-        	sr.seq,
-        	f.funcUrl
+            sr.resId, sr.resCode, resName, resPid, resLevel, resIcon, sr.seq, f.funcUrl
         FROM
         	sys_resource sr
         LEFT JOIN sys_function f ON f.resCode = sr.resCode
@@ -60,6 +53,9 @@
         AND sr.state = 0
         AND funcCode = 'view'
         AND loginName = #{loginName}
+        ORDER BY
+        	resLevel,
+        	seq
     </select>
 
 </mapper>

@@ -1,6 +1,6 @@
 package com.hejinyo.core.mapper;
 
-import com.hejinyo.core.domain.pojo.SysRole;
+import com.hejinyo.core.domain.po.Sys_Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,6 +19,6 @@ public interface SysRoleMapper extends BaseMapper {
      * @param loginName
      * @return
      */
-    List<SysRole> findByLoginName(String loginName);
+    List<Sys_Role> findByLoginName(String loginName);
 
 }

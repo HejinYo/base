@@ -1,6 +1,7 @@
 package com.hejinyo.core.mapper;
 
-import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.domain.dto.ActiveUser;
+import com.hejinyo.core.domain.po.Sys_User;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
@@ -14,12 +15,19 @@ import java.util.Set;
 public interface SysUserMapper extends BaseMapper {
 
     /**
+     * 执行登录，查询用户登录信息
+     * @param loginName
+     * @return
+     */
+    ActiveUser findLoginInfo(String loginName);
+
+    /**
      * 根据登录名查找对应的用户信息
      *
      * @param loginName
      * @return
      */
-    SysUser findByLoginName(String loginName);
+    Sys_User findByLoginName(String loginName);
 
     /**
      * 据登录名查找对应的角色编码字符串

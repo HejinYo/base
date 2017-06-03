@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!DOCTYPE html>
 <!-- Template Name: Clip-Two - Responsive Admin Template build with Twitter Bootstrap 3.x | Author: ClipTheme -->
 <!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
@@ -6,19 +10,9 @@
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
-<!-- start: HEAD -->
-<!-- start: HEAD -->
 <head>
-    <title>Clip-Two - Responsive Admin Template</title>
-    <!-- start: META -->
-    <!--[if IE]>
-    <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/><![endif]-->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
+    <base href="<%=basePath%>"/>
+    <!-- start: HEAD -->
     <link href="resources/assets/fonts/google-fonts.css" rel="stylesheet" type="text/css"/>
     <!-- end: GOOGLE FONTS -->
     <!-- start: MAIN CSS -->
@@ -33,8 +27,8 @@
     <link rel="stylesheet" href="resources/assets/css/styles.css">
     <link rel="stylesheet" href="resources/assets/css/plugins.css">
     <link rel="stylesheet" href="resources/assets/css/themes/theme-1.css" id="skin_color"/>
+    <!-- end: HEAD -->
 </head>
-<!-- end: HEAD -->
 <!-- start: BODY -->
 <body>
 <!-- start: 500 -->

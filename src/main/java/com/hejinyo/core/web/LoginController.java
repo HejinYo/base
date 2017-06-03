@@ -3,7 +3,10 @@ package com.hejinyo.core.web;
 import com.alibaba.fastjson.JSON;
 import com.hejinyo.core.common.jcaptcha.JCaptcha;
 import com.hejinyo.core.common.utils.JsonRetrun;
-import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.domain.dto.ActiveUser;
+import com.hejinyo.core.domain.dto.SysMenu;
+import com.hejinyo.core.domain.po.Sys_User;
+import com.hejinyo.core.service.SysResourceService;
 import jodd.util.StringUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -12,13 +15,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/")
 public class LoginController {
+    @Resource
+    private SysResourceService sysResourceService;
 
     /**
      * 用户登录页面login
@@ -28,25 +35,6 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String to_login() {
         return "core/login";
-    }
-
-    /**
-     * 异步检测验证码是否正确
-     *
-     * @param codejson
-     * @return
-     */
-    @RequestMapping(value = "/verifyImgCheck", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
-    public Map<String, Object> verifyImgCheck(HttpServletRequest request, @RequestBody String codejson) {
-        int flag = 1;
-        String code = JSON.parseObject(codejson).getString("verifyCode");
-        if (StringUtil.isNotEmpty(code)) {
-            if (JCaptcha.hasCaptcha(request, code) || code.equalsIgnoreCase("aaaa")) {
-                flag = 0;
-            }
-        }
-        return JsonRetrun.result(flag);
     }
 
     /**
@@ -88,19 +76,50 @@ public class LoginController {
     }
 
     /**
-     * 验证成功，返回主界面
+     * 验证成功，返回后台管理界面
      *
      * @param request
      * @param session
      * @return
      */
     @RequestMapping(value = "/manage", method = RequestMethod.GET)
-    public ModelAndView loginPost(HttpServletRequest request, HttpSession session) {
+    public ModelAndView manage(HttpServletRequest request, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         Subject subject = SecurityUtils.getSubject();
-        SysUser activeUser = (SysUser) subject.getPrincipal();
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
         mv.addObject("username", activeUser.getUserName());
         mv.setViewName("core/manage");
         return mv;
+    }
+
+    /**
+     * 获得用户菜单
+     * @return
+     */
+    @RequestMapping(value = "/userMenu", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> mutilMenu() {
+        Subject subject = SecurityUtils.getSubject();
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+        return JsonRetrun.result(0, "获取成功", sysResourceService.getMenuList(activeUser.getLoginName()));
+    }
+
+    /**
+     * 异步检测验证码是否正确
+     *
+     * @param codejson
+     * @return
+     */
+    @RequestMapping(value = "/verifyImgCheck", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Map<String, Object> verifyImgCheck(HttpServletRequest request, @RequestBody String codejson) {
+        int flag = 1;
+        String code = JSON.parseObject(codejson).getString("verifyCode");
+        if (StringUtil.isNotEmpty(code)) {
+            if (JCaptcha.hasCaptcha(request, code) || code.equalsIgnoreCase("aaaa")) {
+                flag = 0;
+            }
+        }
+        return JsonRetrun.result(flag);
     }
 }

@@ -1,4 +1,4 @@
-package com.hejinyo.core.domain.pojo;
+package com.hejinyo.core.domain.po;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 
 @Data
-public class SysRoleResource implements Serializable {
+public class Sys_Role_Resource implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer roleResId;//角色授权编号
     private Integer roleId;//角色编号

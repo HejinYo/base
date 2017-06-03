@@ -1,4 +1,4 @@
-package com.hejinyo.core.domain.pojo;
+package com.hejinyo.core.domain.po;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  */
 
 @Data
-public class SysFunction {
+public class Sys_Function {
     private String resCode;//资源编码
     private String funcCode;//权限编码
     private String funcName;//功能名称

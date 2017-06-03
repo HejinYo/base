@@ -1,4 +1,4 @@
-package com.hejinyo.core.domain.pojo;
+package com.hejinyo.core.domain.po;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Data
-public class SysResource implements Serializable {
+public class Sys_Resource implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer resId; //资源编号
     private String resType;//资源类型
@@ -26,5 +26,5 @@ public class SysResource implements Serializable {
     private Integer state;//状态 0：正常；1：锁定；-1：禁用(删除)
     private Date createTime;//创建时间
     private Integer createId;//创建人员ID
-    private List<SysFunction> function;//资源对应的权限信息
+    private List<Sys_Function> function;//资源对应的权限信息
 }

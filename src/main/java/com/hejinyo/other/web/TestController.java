@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hejinyo.core.common.authorization.UserRealm;
 import com.hejinyo.core.common.utils.JsonRetrun;
-import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.domain.po.Sys_User;
 import com.hejinyo.other.domain.Account;
 import com.hejinyo.other.domain.Sys_Dto;
 import net.sf.ehcache.CacheManager;
@@ -324,7 +324,7 @@ public class TestController {
 
     @RequestMapping("/testDto3")
     @ResponseBody
-    public SysUser testDto3(SysUser sys_dto) {
+    public Sys_User testDto3(Sys_User sys_dto) {
         //System.out.println(sys_dto.getSys_menu().getMname());
         System.out.println(sys_dto.getLoginName());
         return sys_dto;
@@ -332,7 +332,7 @@ public class TestController {
 
     @RequestMapping("/testDto2")
     @ResponseBody
-    public SysUser testDto2(SysUser sys_user) {
+    public Sys_User testDto2(Sys_User sys_user) {
         //System.out.println(sys_dto.getSys_menu().getMname());
         System.out.println(sys_user.toString());
         return sys_user;

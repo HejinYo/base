@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!DOCTYPE html>
 <!-- Template Name: Clip-Two - Responsive Admin Template build with Twitter Bootstrap 3.x | Author: ClipTheme -->
 <!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
@@ -6,22 +10,25 @@
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
-<!-- start: HEAD -->
-<link href="resources/assets/fonts/google-fonts.css" rel="stylesheet" type="text/css"/>
-<!-- end: GOOGLE FONTS -->
-<!-- start: MAIN CSS -->
-<link rel="stylesheet" href="resources/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/vendor/fontawesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="resources/vendor/themify-icons/themify-icons.min.css">
-<link href="resources/vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
-<link href="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
-<link href="resources/vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
-<!-- end: MAIN CSS -->
-<!-- start: CLIP-TWO CSS -->
-<link rel="stylesheet" href="resources/assets/css/styles.css">
-<link rel="stylesheet" href="resources/assets/css/plugins.css">
-<link rel="stylesheet" href="resources/assets/css/themes/theme-1.css" id="skin_color"/>
-<!-- end: HEAD -->
+<head>
+    <base href="<%=basePath%>"/>
+    <!-- start: HEAD -->
+    <link href="resources/assets/fonts/google-fonts.css" rel="stylesheet" type="text/css"/>
+    <!-- end: GOOGLE FONTS -->
+    <!-- start: MAIN CSS -->
+    <link rel="stylesheet" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/vendor/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="resources/vendor/themify-icons/themify-icons.min.css">
+    <link href="resources/vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
+    <link href="resources/vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
+    <link href="resources/vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
+    <!-- end: MAIN CSS -->
+    <!-- start: CLIP-TWO CSS -->
+    <link rel="stylesheet" href="resources/assets/css/styles.css">
+    <link rel="stylesheet" href="resources/assets/css/plugins.css">
+    <link rel="stylesheet" href="resources/assets/css/themes/theme-1.css" id="skin_color"/>
+    <!-- end: HEAD -->
+</head>
 <!-- start: BODY -->
 <body>
 <!-- start: 404 -->

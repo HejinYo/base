@@ -71,113 +71,11 @@
 						<div class="navbar-title">
 							<span>菜单</span>
 						</div>
-						<ul class="main-navigation-menu">
-							<li><%-- class="active open"--%>
-								<a href="javascript:void(0)" onclick="JavaScript:openPage('resources/documentation.html')">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-home"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> 主页 </span>
-										</div>
-									</div>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:void(0)" onclick="JavaScript:openPage('user/manager')">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-cloud"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title">用户管理</span>
-										</div>
-									</div>
-								</a>
-							</li>
-							<li>
-								<a href="javascript:void(0)">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-user"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> 登录 </span><i class="icon-arrow"></i>
-										</div>
-									</div>
-								</a>
-								<ul class="sub-menu">
-									<li>
-										<a href="javascript:void(0)">
-											<span class="title"> 登录表单 </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:void(0)">
-											<span class="title"> 注册表单 </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:void(0)">
-											<span class="title"> 忘记密码 </span>
-										</a>
-									</li>
-									<li>
-										<a href="javascript:void(0)">
-											<span class="title">锁屏</span>
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="javascript:void(0)">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-menu-alt"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"> 4 Level Menu </span><i class="icon-arrow"></i>
-										</div>
-									</div>
-								</a>
-								<ul class="sub-menu">
-									<li>
-										<a href="javascript:;" > <i class="icon-arrow"></i>
-											<span class="title"> item 1 </span>
-										</a>
-										<ul class="sub-menu">
-											<li>
-												<a href="javascript:;">
-													<span>Sample Link 1</span> <i class="icon-arrow"></i>
-												</a>
-												<ul class="sub-menu">
-													<li>
-														<a href="javascript:;">
-															Sample Link 1
-														</a>
-													</li>
-													<li>
-														<a href="javascript:;">
-															Sample Link 2
-														</a>
-													</li>
-													<li>
-														<a href="javascript:;">
-															Sample Link 3
-														</a>
-													</li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
+                        <ul class="main-navigation-menu"></ul>
 						<!-- end: MAIN NAVIGATION MENU -->
 						<!-- start: CORE FEATURES -->
 						<div class="navbar-title">
-							<span>核心功能</span>
+							<span>常用</span>
 						</div>
 						<ul class="folders">
 							<li>
@@ -208,7 +106,7 @@
 						<!-- end: CORE FEATURES -->
 						<!-- start: DOCUMENTATION BUTTON -->
 						<div class="wrapper">
-							<a href="javascript:void(0)" onclick="JavaScript:openPage('resources/documentation.html')" class="button-o">
+							<a href="javascript:;" onclick="JavaScript:openPage('resources/documentation.html')" class="button-o">
 								<i class="ti-help"></i>
 								<span>文档</span>
 							</a>
@@ -226,7 +124,7 @@
 						<a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" class="btn btn-navbar sidebar-toggle" data-toggle-class="app-slide-off" data-toggle-target="#app" data-toggle-click-outside="#sidebar">
 							<i class="ti-align-justify"></i>
 						</a>
-						<a class="navbar-brand" href="javascript:void(0)">
+						<a class="navbar-brand" href="javascript:;">
 							<img src="resources/assets/images/core/logo.png" alt="Clip-Two"/>
 						</a>
 						<a href="#" class="sidebar-toggler pull-right visible-md visible-lg" data-toggle-class="app-sidebar-closed" data-toggle-target="#app">

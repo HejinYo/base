@@ -1,6 +1,7 @@
 package com.hejinyo.core.service.impl;
 
-import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.domain.dto.ActiveUser;
+import com.hejinyo.core.domain.po.Sys_User;
 import com.hejinyo.core.mapper.SysUserMapper;
 import com.hejinyo.core.service.SysUserService;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserMapper sysUserMapper;
 
     @Override
-    public SysUser findByLoginName(String loginName) {
-        return sysUserMapper.findByLoginName(loginName);
+    public ActiveUser findLoginInfo(String loginName) {
+        return sysUserMapper.findLoginInfo(loginName);
     }
 
     @Override

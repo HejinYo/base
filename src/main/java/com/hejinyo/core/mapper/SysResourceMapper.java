@@ -14,10 +14,10 @@ import java.util.List;
 public interface SysResourceMapper extends BaseMapper {
 
     /**
-     * 根据角色ID查询权限信息
+     * 根据登录名查询可用菜单
      *
      * @param loginName
      * @return
      */
-    List<SysMenu> getMenuByLoginName(String loginName);
+    List<SysMenu> getMenuList(String loginName);
 }

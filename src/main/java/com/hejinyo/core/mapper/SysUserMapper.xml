@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hejinyo.core.mapper.SysUserMapper">
 
-    <resultMap id="BaseUserMap" type="sysuser">
+    <resultMap id="BaseUserMap" type="sys_user">
         <id column="userId" jdbcType="INTEGER" property="userId"/>
         <result column="userName" jdbcType="VARCHAR" property="userName"/>
         <result column="loginName" jdbcType="VARCHAR" property="loginName"/>
@@ -22,23 +22,25 @@
         state, createTime, createId
        </sql>
 
-    <!-- 根据登录名查找对应的用户信息 -->
-    <select id="findByLoginName" resultMap="BaseUserMap" parameterType="String">
-        select
-        <include refid="Base_User_List"/>
-        from sys_user
-        where loginName=#{loginName}
+    <!-- 执行登录，查询用户登录信息 -->
+    <select id="findLoginInfo" resultType="activeuser" parameterType="String">
+        SELECT
+        	<include refid = "Base_User_List" />
+        FROM
+        	sys_user
+        WHERE
+        	loginName = #{loginName}
     </select>
 
     <!-- 根据登录名查找对应的角色编码字符串 -->
     <select id="findRoleSet" resultType="String" parameterType="String">
-        select
+        SELECT
         	roleCode
-        from
+        FROM
         	sys_role r
-        left join sys_user_role ur on ur.roleId = r.roleId
-        left join sys_user u on u.userId = ur.userId
-        where
+        LEFT JOIN sys_user_role ur ON ur.roleId = r.roleId
+        LEFT JOIN sys_user u ON u.userId = ur.userId
+        WHERE
         	u.loginName = #{loginName}
     </select>
 

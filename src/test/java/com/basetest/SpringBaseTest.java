@@ -2,9 +2,6 @@ package com.basetest;
 
 import com.hejinyo.core.common.utils.Tools;
 import com.hejinyo.core.domain.dto.SysMenu;
-import com.hejinyo.core.domain.pojo.SysFunction;
-import com.hejinyo.core.domain.pojo.SysResource;
-import com.hejinyo.core.domain.pojo.SysUser;
 import com.hejinyo.core.mapper.SysResourceMapper;
 import com.hejinyo.core.mapper.SysRoleMapper;
 import com.hejinyo.core.mapper.SysUserMapper;
@@ -18,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)  //使用junit4进行测试
 @ContextConfiguration({"/spring/spring-base.xml"}) //加载配置文件
@@ -61,7 +57,6 @@ public class SpringBaseTest {
             System.out.println(menu.getMname());
         }
     }
-
 
 }
 

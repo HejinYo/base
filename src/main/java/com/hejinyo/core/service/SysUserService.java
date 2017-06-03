@@ -1,18 +1,19 @@
 package com.hejinyo.core.service;
 
-import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.domain.dto.ActiveUser;
+import com.hejinyo.core.domain.po.Sys_User;
 
 import java.util.Set;
 
 public interface SysUserService {
 
     /**
-     * 根据登录名查找一个用户信息
+     * 执行登录，查询用户登录信息
      *
      * @param loginName
      * @return
      */
-    SysUser findByLoginName(String loginName);
+    ActiveUser findLoginInfo(String loginName);
 
     /**
      * 据登录名查找对应的角色编码字符串

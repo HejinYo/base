@@ -14,7 +14,7 @@ import java.util.List;
 public interface SysResourceService {
 
     /**
-     * 根据角色ID查询权限信息
+     * 根据登录名查询可用菜单
      */
-    List<SysMenu> getMenuByLoginName();
+    List<SysMenu> getMenuList(String loginName);
 }

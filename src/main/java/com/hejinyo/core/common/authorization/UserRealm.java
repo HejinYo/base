@@ -1,6 +1,7 @@
 package com.hejinyo.core.common.authorization;
 
-import com.hejinyo.core.domain.pojo.SysUser;
+import com.hejinyo.core.domain.dto.ActiveUser;
+import com.hejinyo.core.service.SysResourceService;
 import com.hejinyo.core.service.SysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -29,6 +30,9 @@ public class UserRealm extends AuthorizingRealm {
     @Resource
     private SysUserService sysUserService;
 
+    @Resource
+    private SysResourceService sysResourceService;
+
     /**
      * 支持什么类型的token
      *
@@ -50,15 +54,15 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String loginName = (String) token.getPrincipal();//从Token中获取身份信息
-        SysUser activeUser = sysUserService.findByLoginName(loginName);//根据登录名查询用户信息
+        ActiveUser activeUser = sysUserService.findLoginInfo(loginName);//根据登录名查询用户信息
         if (null == activeUser || -1 == activeUser.getState()) {// 如果无相关用户或已删除则返回null
-            logger.debug("登录名：["+loginName+"],尝试登录，无此用户！");
+            logger.debug("登录名：[" + loginName + "],尝试登录，无此用户！");
             return null;
         } else if (1 == activeUser.getState()) {//是否锁定
-            logger.debug("登录名：["+loginName+"],尝试登录，状态为锁定！");
+            logger.debug("登录名：[" + loginName + "],尝试登录，状态为锁定！");
             throw new LockedAccountException(); //抛出帐号锁定异常
         }
-
+        activeUser.setMenus(sysResourceService.getMenuList(loginName));//获得用户菜单，只在登录的时候查询一次
         String password = activeUser.getLoginPwd();//获取用户数据库中密码
         String salt = activeUser.getLoginSalt();//获取用户盐
         // 返回认证信息由父类AuthenticatingRealm进行认证
@@ -74,12 +78,12 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        SysUser ActiveUser = (SysUser) principals.getPrimaryPrincipal();
+        ActiveUser ActiveUser = (ActiveUser) principals.getPrimaryPrincipal();
         String loginName = ActiveUser.getLoginName();
         //获取用户权限
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.addRoles(sysUserService.findRoleSet(loginName));
-        authorizationInfo.addStringPermissions(sysUserService.findFuncSet(loginName));
+        authorizationInfo.addRoles(sysUserService.findRoleSet(loginName));//获得角色信息
+        authorizationInfo.addStringPermissions(sysUserService.findFuncSet(loginName));//获得权限信息
         return authorizationInfo;
 
     }
