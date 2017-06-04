@@ -52,7 +52,7 @@ public class SpringBaseTest {
 
     @Test
     public void testUser() {
-        List<SysMenu> sysMenus = sysResourceMapper.getMenuByLoginName("admin");
+        List<SysMenu> sysMenus = sysResourceMapper.getMenuList("admin");
         for(SysMenu menu : sysMenus){
             System.out.println(menu.getMname());
         }

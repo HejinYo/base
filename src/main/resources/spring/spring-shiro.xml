@@ -38,6 +38,8 @@
                 <!-- 匿名可以访问页面,静态资源 -->
                 /verifyImg** = anon
                 /resources/** anon
+                /webservice/** anon
+                /druid/** anon
                 /test/clearLock = anon
                 /test/html2 = user
                 <!-- 身份认证通过可以访问 -->

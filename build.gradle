@@ -97,6 +97,12 @@ dependencies {
     /* End Tools */
 
     /*test*/
+    // https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws
+    compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version: '3.1.11'
+// https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http
+    compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: '3.1.11'
+    compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http-jetty', version: '3.1.11'
+
     /*end test*/
 }
 

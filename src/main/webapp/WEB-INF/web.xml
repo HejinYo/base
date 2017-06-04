@@ -77,8 +77,20 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- CXF的Servlet -->
+    <servlet>
+        <servlet-name>CXFServlet</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!-- 本系统的WebService路径必须以/webservice/开头 -->
+    <servlet-mapping>
+        <servlet-name>CXFServlet</servlet-name>
+        <url-pattern>/webservice/*</url-pattern>
+    </servlet-mapping>
+
     <!-- Druid 内置WEB监控-->
-    <!-- <filter>
+     <filter>
          <filter-name>DruidWebStatFilter</filter-name>
          <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
          <init-param>
@@ -89,17 +101,17 @@
      <filter-mapping>
          <filter-name>DruidWebStatFilter</filter-name>
          <url-pattern>/*</url-pattern>
-     </filter-mapping>-->
+     </filter-mapping>
 
-    <!-- Druid 内置监控页面 -->
-    <!--<servlet>
+     Druid 内置监控页面
+    <servlet>
         <servlet-name>DruidStatView</servlet-name>
         <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DruidStatView</servlet-name>
         <url-pattern>/druid/*</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
 
     <!-- 验证码过滤器需要放到Shiro之后 因为Shiro将包装HttpSession 如果不 可能造成两次的sesison id 不一样 -->
     <filter>
@@ -111,6 +123,7 @@
         <filter-name>JCaptchaFilter</filter-name>
         <url-pattern>/verifyImg</url-pattern>
     </filter-mapping>
+
 
     <!-- 编码过滤器，格式为UTF-8 -->
     <filter>

@@ -40,5 +40,6 @@
     <import resource="spring-transaction.xml"/>
     <import resource="spring-fastjson.xml"/>
     <import resource="spring-shiro.xml"/>
+    <import resource="spring-cxf.xml"/>
 
 </beans>

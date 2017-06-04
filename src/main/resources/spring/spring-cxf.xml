@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+
+    <!--<jaxws:endpoint id="helloWorld" implementcom.hejinyo.core.service.webservicevice.HelloService" address="/HelloWorld"/>-->
+
+    <!--<bean id="hello" class="com.hejinyo.core.webservice.service.impl.HelloWorldImpl"/>-->
+    <!--<jaxws:endpoint id="helloWorld" implementor="#hello" address="/HelloWorld"/>-->
+
+    <bean id="hello" class="com.hejinyo.core.webservice.service.impl.HelloWorldImpl"/>
+    <jaxws:server id="helloWorld" address="/HelloWorld" serviceClass="com.hejinyo.core.webservice.service.HelloWorld"><!--  接口 -->
+        <jaxws:serviceBean>
+            <ref bean="hello"/> <!-- 实现类 -->
+        </jaxws:serviceBean>
+    </jaxws:server>
+
+</beans>
