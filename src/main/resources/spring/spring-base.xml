@@ -3,15 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/util/spring-util.xsd">
 
     <description>spring主配置文件</description>
 
@@ -30,9 +27,6 @@
 
     <!--Spring中ApplicationContext的工具类-->
     <bean id="SpringContextUtil" class="com.hejinyo.core.common.utils.SpringContext"/>
-
-    <!-- 开启AOP监听,aop启用CGliB代理,只对当前配置文件有效 -->
-    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
 
     <!--引入其他配置文件（springmvc 无需引入）-->
     <import resource="spring-datasource.xml"/>

@@ -1,9 +1,8 @@
 package com.hejinyo.core.common.utils;
 
+import com.hejinyo.core.webservice.client.WebServiceClient;
 import jodd.props.Props;
 import jodd.util.Base64;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.SimpleHash;
 
 import java.io.*;
 import java.util.Properties;
@@ -44,31 +43,37 @@ public class Tools {
     }
 
     /**
-     * 处理用户登录编码，获得加密密码
+     * 获得指定Properties 配置文件对象，用于获取属性值
      *
-     * @param username
-     * @param password
-     * @return String
+     * @param propsFile
+     * @param key
+     * @return
      */
-    public static String loginDecoder(String username, String password) {
-        return base64Decoder(password).replace(username, "");
-    }
-
-    /**
-     * 获得Properties 配置文件对象，用于获取属性值
-     *
-     * @param filePath
-     * @return Props
-     * @apiNote Props p = Tools.getProps("D:/java/IDEA/base/src/main/resources/properties/application.properties");
-     */
-    public static Props getProps(String filePath) {
+    public static String getPropsValue(String propsFile, String key) {
         Props p = new Props();
         try {
-            p.load(new File(filePath));
+            p.load(Tools.class.getClassLoader().getResourceAsStream(propsFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return p;
+        return p.getValue(key);
+    }
+
+    /**
+     * 获得application.properties配置文件信息，用于获取属性值
+     *
+     * @param key
+     * @return
+     */
+    public static String getPropsValue(String key) {
+        String propsFile = "properties/application.properties";
+        Props p = new Props();
+        try {
+            p.load(Tools.class.getClassLoader().getResourceAsStream(propsFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return p.getValue(key);
     }
 
     /**
@@ -93,30 +98,6 @@ public class Tools {
             prop.setProperty(key, value);
             //保存，并加入注释
             prop.store(fos, "Update '" + key + "' value");
-            fos.close();
-        } catch (IOException e) {
-            System.err.println("Visit " + filePath + " for updating " + value + " value error");
-        }
-    }
-
-    public static void setProperties(String filePath, String[] key, String[] value) {
-        Properties prop = new Properties();
-        try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            InputStream fis = new FileInputStream(file);
-            prop.load(fis);
-            //一定要在修改值之前关闭fis
-            fis.close();
-            OutputStream fos = new FileOutputStream(filePath);
-            int vLen = key.length;
-            for (int i = 0; i < vLen; i++) {
-                prop.setProperty(key[i], value[i]);
-            }
-            //保存，并加入注释
-            prop.store(fos, "Update Value");
             fos.close();
         } catch (IOException e) {
             System.err.println("Visit " + filePath + " for updating " + value + " value error");
@@ -150,27 +131,12 @@ public class Tools {
         return pw;
     }
 
-    public static String generatePassword(String username,String password) {
-        String algorithmName = "md5";
-        int hashIterations = 2;
-
-        String randomNumber = new SecureRandomNumberGenerator().nextBytes().toHex();//随机数
-        System.out.println(randomNumber);
-
-        SimpleHash hash = new SimpleHash(algorithmName, password, username+randomNumber, hashIterations);
-        String encodedPassword = hash.toString();
-        System.out.println(hash.toString());
-        System.out.println(hash.toHex());
-        return encodedPassword;
-    }
-
     /*************************************************************/
 
     public static void main(String agrs[]) {
         //String password = generatePassword("admin","123456");
         //System.out.println(base64Decoder("4AvVhmFLUs0KTA3Kprsdag=="));
-        System.out.println(base64Encode("123456"));
-        System.out.println("???");
-        System.out.println(base64Decoder("TVRJek5EVTI="));
+        //System.out.println(getPropsValue("properties/application.properties", "cxf.username"));
+        System.out.println(WebServiceClient.sendClient("sum", new Object[]{1, 2}));
     }
 }

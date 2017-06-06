@@ -95,13 +95,12 @@ dependencies {
     compile 'org.jodd:jodd-props:3.8.1'
     /*compile 'net.sourceforge.jexcelapi:jxl:2.6.12'*/
     /* End Tools */
-
+    /*CXF*/
+    compile 'org.apache.cxf:cxf-rt-frontend-jaxws:3.1.11'
+    compile 'org.apache.cxf:cxf-rt-transports-http:3.1.11'
+    compile 'org.apache.cxf:cxf-rt-ws-security:3.1.11'
+    /*end CXF*/
     /*test*/
-    // https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws
-    compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version: '3.1.11'
-// https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http
-    compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version: '3.1.11'
-    compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http-jetty', version: '3.1.11'
 
     /*end test*/
 }

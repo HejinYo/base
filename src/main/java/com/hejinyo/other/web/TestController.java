@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hejinyo.core.common.authorization.UserRealm;
 import com.hejinyo.core.common.utils.JsonRetrun;
+import com.hejinyo.core.common.utils.Tools;
 import com.hejinyo.core.domain.po.Sys_User;
 import com.hejinyo.other.domain.Account;
 import com.hejinyo.other.domain.Sys_Dto;
@@ -360,5 +361,11 @@ public class TestController {
         return sys_dto;
         //return JsonRetrun.result(1,gson.toJson(sys_user));
     }
+
+    @RequestMapping("/testPath")
+      @ResponseBody
+      public String  testPath() {
+          return Tools.getPropsValue("properties/application.properties","cxf.username");
+      }
 
 }
